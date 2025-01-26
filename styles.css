@@ -117,16 +117,19 @@ button:hover {
     background: #e91e63;
 }
 
-/* Button Container for Previous & Next buttons */
+/* Button Container for Previous, Next, and Start Over buttons */
 .button-container {
     display: flex;
+    flex-direction: column; /* Stack buttons vertically */
     justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
 /* Previous & Next Button Styles */
 #prev-btn,
-#next-btn {
+#next-btn,
+#start-over-btn { /* Added style for Start Over button */
     display: inline-block;
     margin: 10px;
     padding: 12px 20px;

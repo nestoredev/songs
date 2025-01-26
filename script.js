@@ -44,17 +44,8 @@ function loadSong(songIndex) {
     audioPlayer.load();
 
     // Show or hide buttons based on song position
-    if (currentSongIndex === 0) {
-        prevButton.classList.add('hidden'); // Hide previous button on the first song
-    } else {
-        prevButton.classList.remove('hidden'); // Show previous button on other songs
-    }
-
-    if (currentSongIndex === songs.length - 1) {
-        nextButton.classList.add('hidden'); // Hide next button on the last song
-    } else {
-        nextButton.classList.remove('hidden'); // Show next button on other songs
-    }
+    prevButton.style.display = currentSongIndex === 0 ? 'none' : 'inline-block'; // Hide on first song
+    nextButton.style.display = currentSongIndex === songs.length - 1 ? 'none' : 'inline-block'; // Hide on last song
 }
 
 // Event listener for the start button

@@ -43,9 +43,13 @@ async function fetchLyrics(title, artist) {
         });
 
         const searchData = await searchResponse.json();
-        const songPath = searchData.response.hits[0].result.path;
+        const songPath = searchData.response.hits[0]?.result?.path;
 
-        // Get the lyrics
+        if (!songPath) {
+            return null; // Return null if no song path is found
+        }
+
+        // Get the lyrics from Genius
         const lyricsResponse = await fetch(`https://genius.com${songPath}`);
         const lyricsPage = await lyricsResponse.text();
 
@@ -54,11 +58,11 @@ async function fetchLyrics(title, artist) {
         if (lyricsMatch && lyricsMatch[1]) {
             return lyricsMatch[1].replace(/<br>/g, '\n'); // Clean up HTML <br> tags
         } else {
-            return 'Lyrics not found.';
+            return null; // Return null if no lyrics found
         }
     } catch (error) {
         console.error("Error fetching lyrics:", error);
-        return 'Lyrics not available.';
+        return null; // Return null in case of any error
     }
 }
 
@@ -72,9 +76,13 @@ async function loadSong(songIndex) {
     artistName.textContent = `Artist: ${song.artist}`;
     songMeaning.textContent = `Meaning: ${song.meaning}`;
 
-    // Fetch lyrics from Genius API
+    // First, try to fetch lyrics from the Genius API
     const lyrics = await fetchLyrics(song.title, song.artist);
-    songLyrics.innerHTML = lyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
+
+    // If no lyrics are found from Genius, fall back to the lyrics in the JSON file
+    const displayedLyrics = lyrics || song.lyrics || 'Lyrics not available.';
+
+    songLyrics.innerHTML = displayedLyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
 
     // Set the audio source
     audioSource.src = song.file;

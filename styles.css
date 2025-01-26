@@ -117,6 +117,30 @@ button:hover {
     background: #e91e63;
 }
 
+/* Button Container for Previous & Next buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Previous & Next Button Styles */
+#prev-btn,
+#next-btn {
+    display: inline-block;
+    visibility: visible;
+}
+
+/* Hide previous button on the first song */
+#prev-btn.hidden {
+    visibility: hidden;
+}
+
+/* Hide next button on the last song */
+#next-btn.hidden {
+    visibility: hidden;
+}
+
 /* Responsive Design */
 @media (max-width: 600px) {
     #playlist-screen {

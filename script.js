@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextBtn = document.getElementById("nextBtn");
     const playPauseBtn = document.getElementById("playPauseBtn");
     const songTitle = document.getElementById("songTitle");
-    const songArtist = document.getElementById("songArtist"); // New element for the artist
+    const songArtist = document.getElementById("songArtist"); // Artist name
     const songDescription = document.getElementById("songDescription");
     const audioPlayer = document.getElementById("audioPlayer");
     const songSection = document.querySelector(".song-section");
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (songs.length > 0) {
                 currentIndex = 0;
                 updateUI();
+                audioPlayer.play();  // Start playing the first song immediately
             }
         } catch (error) {
             console.error("Error fetching song list:", error);
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (currentIndex > 0) {
             currentIndex--;
             updateUI();
+            audioPlayer.play();  // Auto-play the previous song
         }
     }
 
@@ -58,21 +60,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (currentIndex < songs.length - 1) {
             currentIndex++;
             updateUI();
+            audioPlayer.play();  // Auto-play the next song
         } else {
-            // Loop back to the first song if it's the last one
             currentIndex = 0;
             updateUI();
-        }
-    }
-
-    // Play or pause the song when the play/pause button is clicked
-    function togglePlayPause() {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            playPauseBtn.innerText = "⏸️ Pause";
-        } else {
-            audioPlayer.pause();
-            playPauseBtn.innerText = "▶️ Play";
+            audioPlayer.play();  // Auto-play from the beginning if it's the last song
         }
     }
 
@@ -82,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Event listeners for the buttons
     prevBtn.addEventListener("click", previousSong);
     nextBtn.addEventListener("click", nextSong);
-    playPauseBtn.addEventListener("click", togglePlayPause);
 
     // Event listener to start the music playlist
     startBtn.addEventListener("click", () => {

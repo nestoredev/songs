@@ -128,17 +128,18 @@ button:hover {
 #prev-btn,
 #next-btn {
     display: inline-block;
-    visibility: visible;
+    margin: 10px;
+    padding: 12px 20px;
 }
 
 /* Hide previous button on the first song */
 #prev-btn.hidden {
-    visibility: hidden;
+    display: none;
 }
 
 /* Hide next button on the last song */
 #next-btn.hidden {
-    visibility: hidden;
+    display: none;
 }
 
 /* Responsive Design */

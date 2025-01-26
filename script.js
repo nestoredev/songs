@@ -9,18 +9,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const songDescription = document.getElementById("songDescription");
     const audioPlayer = document.getElementById("audioPlayer");
 
+    let songs = [];
+    let currentIndex = 0;
+
     async function fetchSongs() {
         try {
             const response = await fetch("data/songs.json");
-            return await response.json();
+            songs = await response.json();
+            updateUI();
         } catch (error) {
             console.error("Error fetching song list:", error);
-            return [];
         }
     }
-
-    const songs = await fetchSongs();
-    let currentIndex = 0;
 
     function fadeOutAudio(callback) {
         let volume = 1.0;
@@ -58,15 +58,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         const encodedFileName = encodeURIComponent(track.name) + ".mp3";
         audioPlayer.src = `songs/${encodedFileName}`;
         songTitle.innerText = `${track.title} - ${track.artist}`;
-        songDescription.innerHTML = track.description;
+        songDescription.innerText = track.description;
+
+        prevBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
+        nextBtn.style.display = currentIndex === songs.length - 1 ? "none" : "inline-block";
 
         if (playNext) {
             fadeInAudio();
             playPauseBtn.innerText = "⏸️ Pause";
         }
-
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === songs.length - 1;
     }
 
     function nextSong() {
@@ -105,10 +105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     audioPlayer.addEventListener("ended", nextSong);
 
     startBtn.addEventListener("click", () => {
-        welcomeMessage.style.display = "none";
-        content.style.display = "block";
-        updateUI(true);
+        welcomeMessage.classList.add("hidden");
+        content.classList.remove("hidden");
+        fetchSongs();
     });
 
-    content.style.display = "none";  
+    content.classList.add("hidden");
 });

@@ -27,7 +27,8 @@ fetch('songs.json')
 
 function loadSong(song) {
     songTitle.textContent = song.title; // Title of the song
-    albumArt.src = song.albumArt; // Album art
+    albumArt.src = song.albumArt ? song.albumArt : "assets/images/pink_heart.jpeg"; // If no album art, use the pink heart
+    albumArt.alt = song.albumArt ? `Album art for ${song.title}` : "Pink Heart"; // Set alt text based on the album art
     artistName.textContent = `Artist: ${song.artist}`; // Artist name
     songMeaning.textContent = song.meaning; // Song meaning
     

@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Love Songs</title>
+    <title>Love Songs</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="welcome-message">
-        <h1>Happy Valentine's Day!</h1>
-        <p>These songs hold a special place in my heart because of you.</p>
-        <button id="startBtn">Start</button>
+        <h1>Welcome to Our Love Songs Playlist!</h1>
+        <p>Each of these songs holds a special meaning between us.</p>
+        <button id="startBtn">Start Playlist</button>
     </div>
 
     <div id="content" class="hidden">
         <div class="song-section">
             <h2 id="songTitle"></h2>
+            <h3 id="songArtist"></h3> <!-- Artist name displayed here -->
             <p id="songDescription"></p>
-
-            <audio id="audioPlayer" controls></audio>
-
             <div class="player-controls">
-                <button id="prevBtn">⏮️ Previous</button>
+                <button id="prevBtn">◀️ Prev</button>
                 <button id="playPauseBtn">▶️ Play</button>
-                <button id="nextBtn">⏭️ Next</button>
+                <button id="nextBtn">Next ▶️</button>
             </div>
+            <audio id="audioPlayer" controls></audio>
         </div>
     </div>
 

@@ -16,9 +16,11 @@
         "file": "assets/music/The-Book-of-Love.mp3"
     },
     {
-        "title": "Song 3",
+        "title": "My One and Only Love",
+        "artist": "Paul McCartney",
         "albumArt": "assets/images/album3.jpg",
         "meaning": "The meaning behind Song 3...",
+        "lyrics": "",
         "file": "assets/music/song3.mp3"
     }
 ]

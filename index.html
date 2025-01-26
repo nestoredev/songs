@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Songs</title>
+    <title>Love Songs Playlist</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="welcome-message">
-        <h1>Welcome to Our Love Songs Playlist!</h1>
-        <p>Each of these songs holds a special meaning between us.</p>
-        <button id="startBtn">Start Playlist</button>
-    </div>
 
-    <div id="content" class="hidden">
-        <div class="song-section">
-            <h2 id="songTitle"></h2>
-            <h3 id="songArtist"></h3> <!-- Artist name displayed here -->
-            <p id="songDescription"></p>
-            <div class="player-controls">
-                <button id="prevBtn">◀️ Prev</button>
-                <button id="playPauseBtn">▶️ Play</button>
-                <button id="nextBtn">Next ▶️</button>
-            </div>
-            <audio id="audioPlayer" controls></audio>
+<!-- Welcome Message -->
+<div id="welcomeMessage" class="welcome-message">
+    Welcome! Let's start our playlist of special love songs.
+</div>
+
+<!-- Start Playlist Button -->
+<button id="startBtn">Start Playlist</button>
+
+<!-- Song Information & Controls -->
+<div class="container">
+    <div class="song-section" id="song1">
+        <h2 id="songTitle"></h2>
+        <p id="songArtist"></p>
+        <p id="songDescription"></p>
+        <audio id="audioPlayer" controls></audio>
+        <div class="controls">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
         </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

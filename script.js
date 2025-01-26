@@ -1,70 +1,76 @@
-let songs = [];
+// DOM Elements
+const startButton = document.getElementById('start-btn');
+const welcomeScreen = document.getElementById('welcome-screen');
+const playlistScreen = document.getElementById('playlist-screen');
+const songTitle = document.getElementById('song-title');
+const artistName = document.getElementById('artist-name');
+const songMeaning = document.getElementById('song-meaning');
+const songLyrics = document.getElementById('song-lyrics');
+const audioPlayer = document.getElementById('audio-player');
+const audioSource = document.getElementById('audio-source');
+const prevButton = document.getElementById('prev-btn');
+const nextButton = document.getElementById('next-btn');
+
+// Current song index
 let currentSongIndex = 0;
 
-const songTitle = document.getElementById("song-title");
-const albumArt = document.getElementById("album-art");
-const artistName = document.getElementById("artist-name");
-const songMeaning = document.getElementById("song-meaning");
-const songLyrics = document.getElementById("song-lyrics");
-const audioPlayer = document.getElementById("audio-player");
-const audioSource = document.getElementById("audio-source");
+// Load the song data from the JSON file
+async function loadSongs() {
+    try {
+        const response = await fetch('assets/songs.json');
+        const data = await response.json();
+        return data.songs;
+    } catch (error) {
+        console.error("Error loading the songs data:", error);
+        return [];
+    }
+}
 
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-const welcomeScreen = document.getElementById("welcome-screen");
-const playlistScreen = document.getElementById("playlist-screen");
-const startBtn = document.getElementById("start-btn");
-
-// Fetch song data from the JSON file
-fetch('songs.json')
-    .then(response => response.json())
-    .then(data => {
-        songs = data;
-    })
-    .catch(error => {
-        console.error('Error loading song data:', error);
-    });
-
-function loadSong(song) {
-    songTitle.textContent = song.title; // Title of the song
-    albumArt.src = song.albumArt ? song.albumArt : "assets/images/pink_heart.jpeg"; // If no album art, use the pink heart
-    albumArt.alt = song.albumArt ? `Album art for ${song.title}` : "Pink Heart"; // Set alt text based on the album art
-    artistName.textContent = `Artist: ${song.artist}`; // Artist name
-    songMeaning.textContent = song.meaning; // Song meaning
+// Show the first song
+function loadSong(songIndex, songs) {
+    const song = songs[songIndex];
     
-    // Replace line breaks with <br> in the lyrics
-    songLyrics.innerHTML = song.lyrics.replace(/\n/g, '<br>'); // Lyrics with line breaks
+    songTitle.textContent = song.title;
+    artistName.textContent = `Artist: ${song.artist}`;
+    songMeaning.textContent = `Meaning: ${song.meaning}`;
+    songLyrics.innerHTML = song.lyrics.replace(/\n/g, '<br>'); // Break lyrics into multiple lines
     
-    audioSource.src = song.mp3; // Song MP3 source
-    audioPlayer.load(); // Reload audio player
+    // Set the audio source
+    audioSource.src = song.file;
+    audioPlayer.load();  // Reload the player with the new song
 }
 
-function playNextSong() {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
-    loadSong(songs[currentSongIndex]);
-    audioPlayer.play();
-}
-
-function playPrevSong() {
-    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    loadSong(songs[currentSongIndex]);
-    audioPlayer.play();
-}
-
-// Play button on the welcome screen
-startBtn.addEventListener('click', () => {
-    welcomeScreen.style.opacity = 0; // Fade out the welcome screen
-    setTimeout(() => {
-        welcomeScreen.style.display = 'none'; // Hide the welcome screen
-        playlistScreen.classList.remove('hidden'); // Show the playlist screen
-        playlistScreen.style.opacity = 1; // Fade in the playlist screen
-        albumArt.style.display = 'block'; // Ensure album art is visible on the playlist screen
-        loadSong(songs[currentSongIndex]); // Load the first song
-        audioPlayer.play();
-    }, 1000); // Wait for fade-out to finish before hiding
+// Start the playlist
+startButton.addEventListener('click', async () => {
+    const songs = await loadSongs();
+    if (songs.length > 0) {
+        welcomeScreen.style.display = 'none';
+        playlistScreen.style.display = 'block';
+        playlistScreen.style.opacity = 1;  // Fade in
+        loadSong(currentSongIndex, songs);  // Load the first song
+    }
 });
 
-audioPlayer.addEventListener('ended', playNextSong);
+// Play the next song
+nextButton.addEventListener('click', async () => {
+    const songs = await loadSongs();
+    currentSongIndex = (currentSongIndex + 1) % songs.length;  // Loop to the first song if at the end
+    loadSong(currentSongIndex, songs);
+    audioPlayer.play();
+});
 
-prevBtn.addEventListener('click', playPrevSong);
-nextBtn.addEventListener('click', playNextSong);
+// Play the previous song
+prevButton.addEventListener('click', async () => {
+    const songs = await loadSongs();
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;  // Loop to the last song if at the beginning
+    loadSong(currentSongIndex, songs);
+    audioPlayer.play();
+});
+
+// Auto-play next song after current one finishes
+audioPlayer.addEventListener('ended', async () => {
+    const songs = await loadSongs();
+    currentSongIndex = (currentSongIndex + 1) % songs.length;  // Loop to the first song if at the end
+    loadSong(currentSongIndex, songs);
+    audioPlayer.play();
+});

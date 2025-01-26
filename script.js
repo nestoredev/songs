@@ -51,6 +51,17 @@ async function fetchLyrics(title, artist) {
     }
 }
 
+// Function to clean up lyrics
+function cleanUpLyrics(lyrics) {
+    // Step 1: Remove extra new lines between lines in the same verse
+    let cleanedLyrics = lyrics.replace(/\n\s*\n/g, '\n'); // Remove extra blank lines within verses
+
+    // Step 2: Ensure there's one blank line between verses
+    cleanedLyrics = cleanedLyrics.replace(/\n{2,}/g, '\n\n'); // Replace multiple newlines with one
+
+    return cleanedLyrics;
+}
+
 // Function to load and display a song
 async function loadSong(songIndex) {
     if (songs.length === 0) return; // Prevent errors if songs are not loaded
@@ -67,7 +78,10 @@ async function loadSong(songIndex) {
     // If no lyrics are found from Lyrics.ovh, fall back to the lyrics in the JSON file
     const displayedLyrics = lyrics || song.lyrics || 'Lyrics not available.';
 
-    songLyrics.innerHTML = displayedLyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
+    // Clean up the lyrics before displaying
+    const cleanedLyrics = cleanUpLyrics(displayedLyrics);
+
+    songLyrics.innerHTML = cleanedLyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
 
     // Set the audio source
     audioSource.src = song.file;

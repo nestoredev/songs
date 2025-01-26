@@ -1,138 +1,137 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body Styling */
+/* General Body Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f1f1;
-  color: #4a4a4a;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 /* Welcome Screen */
 #welcome-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  transition: opacity 1s ease;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
-.welcome-content h1 {
-  font-size: 2.5rem;
-  color: #e91e63;
-  margin-bottom: 1rem;
+#welcome-screen h1 {
+    font-size: 2.5rem;
+    color: #ff5c8d;  /* Soft pink */
+    margin-bottom: 20px;
 }
 
-.welcome-content p {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 2rem;
+#welcome-screen #start-btn {
+    padding: 15px 30px;
+    background-color: #ff5c8d; /* Soft pink */
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s;
 }
 
-.btn {
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  border-radius: 25px;
-  transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #d81b60;
+#welcome-screen #start-btn:hover {
+    background-color: #ff2b5b; /* Darker pink on hover */
 }
 
 /* Playlist Screen */
 #playlist-screen {
-  display: none;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
+    display: none;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-#playlist-screen.hidden {
-  display: none;
+#playlist-screen h2 {
+    font-size: 2rem;
+    color: #ff5c8d;
+    margin-bottom: 10px;
 }
 
-.song-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
+/* Song Title */
+#song-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 20px 0;
 }
 
+/* Artist and Song Meaning */
+#artist-name, #song-meaning {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Lyrics */
+#song-lyrics {
+    font-size: 1rem;
+    color: #444;
+    margin: 20px 0;
+    padding: 0 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Album Art */
 #album-art {
-  width: 200px;
-  height: 200px;
-  border-radius: 15px;
-  margin-right: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: opacity 0.5s ease;
 }
 
-h2 {
-  font-size: 2rem;
-  color: #e91e63;
+/* Audio Player */
+#audio-player {
+    margin-top: 20px;
 }
 
-p {
-  font-size: 1.1rem;
-  color: #555;
-  width: 60%;
-  margin: 0 auto;
+/* Buttons (Prev/Next) */
+button {
+    background-color: #ff5c8d;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    margin: 20px 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    transition: background-color 0.3s;
 }
 
-/* Lyrics Section */
-.lyrics-section {
-  margin-top: 2rem;
-  text-align: left;
-  width: 70%;
-  margin: 0 auto;
+button:hover {
+    background-color: #ff2b5b;
 }
 
-.lyrics-section h3 {
-  font-size: 1.5rem;
-  color: #e91e63;
-  margin-bottom: 1rem;
+/* Layout and Centering */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.lyrics-section p {
-  font-size: 1.1rem;
-  color: #444;
-  white-space: pre-line; /* Preserve line breaks */
+/* Pink Heart Default Image */
+#album-art.default {
+    background-image: url('assets/images/pink_heart.jpeg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
 }
 
-/* Controls */
-.controls {
-  margin-top: 2rem;
-}
-
-.controls button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1.1rem;
-  color: white;
-  background-color: #e91e63;
-  border: none;
-  border-radius: 25px;
-  margin: 0 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.controls button:hover {
-  background-color: #d81b60;
+/* Smooth Transitions */
+.hidden {
+    display: none !important;
 }

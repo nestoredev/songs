@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const content = document.getElementById("content");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const songTitle = document.getElementById("songTitle");
     const songDescription = document.getElementById("songDescription");
     const audioPlayer = document.getElementById("audioPlayer");
 
@@ -53,12 +55,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (songs.length === 0) return;
         
         const track = songs[currentIndex];
-        const encodedFileName = encodeURIComponent(track.name) + ".mp3"; // Encode spaces & special characters
+        const encodedFileName = encodeURIComponent(track.name) + ".mp3";
         audioPlayer.src = `songs/${encodedFileName}`;
-        songDescription.innerHTML = `<strong>${track.title}</strong> by ${track.artist}<br>${track.description}`;
+        songTitle.innerText = `${track.title} - ${track.artist}`;
+        songDescription.innerHTML = track.description;
 
         if (playNext) {
             fadeInAudio();
+            playPauseBtn.innerText = "⏸️ Pause";
         }
 
         prevBtn.disabled = currentIndex === 0;
@@ -74,6 +78,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    function togglePlayPause() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseBtn.innerText = "⏸️ Pause";
+        } else {
+            audioPlayer.pause();
+            playPauseBtn.innerText = "▶️ Play";
+        }
+    }
+
     prevBtn.addEventListener("click", () => {
         if (currentIndex > 0) {
             fadeOutAudio(() => {
@@ -87,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         nextSong();
     });
 
+    playPauseBtn.addEventListener("click", togglePlayPause);
     audioPlayer.addEventListener("ended", nextSong);
 
     startBtn.addEventListener("click", () => {

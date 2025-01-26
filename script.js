@@ -58,6 +58,7 @@ startBtn.addEventListener('click', () => {
         welcomeScreen.style.display = 'none'; // Hide the welcome screen
         playlistScreen.classList.remove('hidden'); // Show the playlist screen
         playlistScreen.style.opacity = 1; // Fade in the playlist screen
+        albumArt.style.display = 'block'; // Ensure album art is visible on the playlist screen
         loadSong(songs[currentSongIndex]); // Load the first song
         audioPlayer.play();
     }, 1000); // Wait for fade-out to finish before hiding

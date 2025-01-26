@@ -10,6 +10,7 @@ const audioPlayer = document.getElementById('audio-player');
 const audioSource = document.getElementById('audio-source');
 const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
+const startOverButton = document.getElementById('start-over-btn'); // New "Start Over" button
 
 let currentSongIndex = 0; // Track the current song index
 let songs = []; // Store songs globally
@@ -99,8 +100,10 @@ async function loadSong(songIndex) {
 
     if (currentSongIndex === songs.length - 1) {
         nextButton.style.display = 'none'; // Hide next button on last song
+        startOverButton.style.display = 'inline-block'; // Show the "Start Over" button on the last song
     } else {
         nextButton.style.display = 'inline-block'; // Show next button on other songs
+        startOverButton.style.display = 'none'; // Hide the "Start Over" button on non-last songs
     }
 }
 
@@ -140,6 +143,13 @@ prevButton.addEventListener('click', () => {
     currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length; // Loop to end
     loadSong(currentSongIndex);
     audioPlayer.play();
+});
+
+// Event listener for the "Start Over" button
+startOverButton.addEventListener('click', () => {
+    currentSongIndex = 0; // Set the index to the first song
+    loadSong(currentSongIndex); // Load the first song
+    audioPlayer.play(); // Play the audio
 });
 
 // Auto-play next song when the current one ends

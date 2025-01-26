@@ -1,0 +1,14 @@
+[
+    {
+        "name": "song1",
+        "title": "Perfect",
+        "artist": "Ed Sheeran",
+        "description": "This song reminds me of our first dance together."
+    },
+    {
+        "name": "song2",
+        "title": "All of Me",
+        "artist": "John Legend",
+        "description": "The lyrics describe exactly how I feel about you."
+    }
+]

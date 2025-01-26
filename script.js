@@ -16,7 +16,7 @@ let currentSongIndex = 0; // Track the current song index
 // Function to load song data from JSON file
 async function loadSongs() {
     try {
-        const response = await fetch('songs.json'); // Now correctly referencing the main directory
+        const response = await fetch('songs.json'); // Correct reference to the main directory
         const data = await response.json();
         return data.songs;
     } catch (error) {
@@ -44,14 +44,18 @@ startButton.addEventListener('click', async () => {
     const songs = await loadSongs();
     
     if (songs.length > 0) {
-        // Apply fade-out effect to welcome screen
+        // Fade out the welcome screen
+        welcomeScreen.style.transition = "opacity 0.5s ease-in-out";
         welcomeScreen.style.opacity = 0;
+
         setTimeout(() => {
-            welcomeScreen.style.display = 'none'; // Hide it after fade-out
-            playlistScreen.style.display = 'block';
+            welcomeScreen.style.display = 'none'; // Hide after fade-out
+            playlistScreen.style.display = 'flex';
+
             setTimeout(() => {
                 playlistScreen.style.opacity = 1; // Fade in the playlist screen
             }, 100);
+
             loadSong(currentSongIndex, songs);
         }, 500); // Delay should match CSS transition time
     }

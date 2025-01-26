@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const songTitle = document.getElementById("songTitle");
     const songDescription = document.getElementById("songDescription");
     const audioPlayer = document.getElementById("audioPlayer");
+    const songSection = document.querySelector(".song-section");
 
     let songs = [];
     let currentIndex = 0;
@@ -16,7 +17,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const response = await fetch("data/songs.json");
             songs = await response.json();
-            updateUI();
+            if (songs.length > 0) {
+                currentIndex = 0;
+                updateUI(true); // Start with the first song
+            }
         } catch (error) {
             console.error("Error fetching song list:", error);
         }
@@ -53,12 +57,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function updateUI(playNext = false) {
         if (songs.length === 0) return;
-        
+
         const track = songs[currentIndex];
         const encodedFileName = encodeURIComponent(track.name) + ".mp3";
         audioPlayer.src = `songs/${encodedFileName}`;
-        songTitle.innerText = `${track.title} - ${track.artist}`;
+        songTitle.innerText = track.title;
         songDescription.innerText = track.description;
+
+        // Ensure section becomes visible
+        songSection.classList.add("active");
 
         prevBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
         nextBtn.style.display = currentIndex === songs.length - 1 ? "none" : "inline-block";
@@ -107,8 +114,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     startBtn.addEventListener("click", () => {
         welcomeMessage.classList.add("hidden");
         content.classList.remove("hidden");
+        songSection.classList.add("active"); // Show the song section
         fetchSongs();
     });
 
-    content.classList.add("hidden");
+    content.classList.add("hidden"); // Hide content initially
 });

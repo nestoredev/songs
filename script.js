@@ -44,8 +44,17 @@ function loadSong(songIndex) {
     audioPlayer.load();
 
     // Show or hide buttons based on song position
-    prevButton.style.display = currentSongIndex === 0 ? 'none' : 'inline-block'; // Hide on first song
-    nextButton.style.display = currentSongIndex === songs.length - 1 ? 'none' : 'inline-block'; // Hide on last song
+    if (currentSongIndex === 0) {
+        prevButton.style.display = 'none'; // Hide previous on first song
+    } else {
+        prevButton.style.display = 'inline-block'; // Show previous on other songs
+    }
+
+    if (currentSongIndex === songs.length - 1) {
+        nextButton.style.display = 'none'; // Hide next on last song
+    } else {
+        nextButton.style.display = 'inline-block'; // Show next on other songs
+    }
 }
 
 // Event listener for the start button

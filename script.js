@@ -11,6 +11,10 @@ const audioSource = document.getElementById('audio-source');
 const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
 const startOverButton = document.getElementById('start-over-btn'); // New "Start Over" button
+const fullPlaylistButton = document.getElementById('full-playlist-btn'); // New "Full Playlist" button
+const fullPlaylistScreen = document.getElementById('full-playlist-screen'); // Full Playlist screen
+const backToPlayerButton = document.getElementById('back-to-player-btn'); // Back to player button
+const playlistList = document.getElementById('playlist'); // Playlist list
 
 let currentSongIndex = 0; // Track the current song index
 let songs = []; // Store songs globally
@@ -54,12 +58,8 @@ async function fetchLyrics(title, artist) {
 
 // Function to clean up lyrics
 function cleanUpLyrics(lyrics) {
-    // Step 1: Remove extra new lines between lines in the same verse
     let cleanedLyrics = lyrics.replace(/\n\s*\n/g, '\n'); // Remove extra blank lines within verses
-
-    // Step 2: Ensure there's one blank line between verses
     cleanedLyrics = cleanedLyrics.replace(/\n{2,}/g, '\n\n'); // Replace multiple newlines with one
-
     return cleanedLyrics;
 }
 
@@ -107,6 +107,25 @@ async function loadSong(songIndex) {
     }
 }
 
+// Function to update the playlist list
+function updatePlaylistList() {
+    playlistList.innerHTML = ''; // Clear existing list
+    songs.forEach((song, index) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.textContent = `${song.title} - ${song.artist}`;
+        link.href = '#';
+        link.addEventListener('click', () => {
+            currentSongIndex = index;
+            loadSong(currentSongIndex);
+            playlistScreen.style.display = 'flex';
+            fullPlaylistScreen.style.display = 'none'; // Hide full playlist screen
+        });
+        listItem.appendChild(link);
+        playlistList.appendChild(listItem);
+    });
+}
+
 // Event listener for the start button
 startButton.addEventListener('click', async () => {
     await loadSongs();
@@ -150,6 +169,19 @@ startOverButton.addEventListener('click', () => {
     currentSongIndex = 0; // Set the index to the first song
     loadSong(currentSongIndex); // Load the first song
     audioPlayer.play(); // Play the audio
+});
+
+// Event listener for the "Full Playlist" button
+fullPlaylistButton.addEventListener('click', () => {
+    fullPlaylistScreen.style.display = 'flex'; // Show full playlist screen
+    playlistScreen.style.display = 'none'; // Hide the player screen
+    updatePlaylistList(); // Update the playlist list with song titles and artists
+});
+
+// Event listener for the "Back to Player" button
+backToPlayerButton.addEventListener('click', () => {
+    fullPlaylistScreen.style.display = 'none'; // Hide full playlist screen
+    playlistScreen.style.display = 'flex'; // Show player screen
 });
 
 // Auto-play next song when the current one ends

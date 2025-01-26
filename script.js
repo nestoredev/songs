@@ -81,6 +81,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (currentIndex < songs.length - 1) {
                 currentIndex++;
                 updateUI(true);
+            } else {
+                // Loop back to the first song
+                currentIndex = 0;
+                updateUI(true);
             }
         });
     }

@@ -4,6 +4,12 @@
         "title": "All My Love",
         "artist": "Coldplay",
         "description": "This song reminds me of our first dance together."
+    },
+    {
+        "name": "The Book of Love",
+        "title": "The Book of Love",
+        "artist": "Peter Gabriel",
+        "description": "Love it"
     }
     
 ]

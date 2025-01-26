@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
         songTitle.innerText = currentSong.title;
         songArtist.innerText = currentSong.artist;
         songDescription.innerText = currentSong.description;
-        audioElement.src = currentSong.audioSrc;
+
+        // Construct the audio source based on the title of the song
+        const audioFilePath = `songs/${currentSong.title.replace(/\s+/g, '')}.mp3`; // Removes spaces in the title for the file path
+        audioElement.src = audioFilePath;
         audioElement.play();
     }
 

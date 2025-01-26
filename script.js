@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error loading songs:', err);
         });
 
-    // Function to update song details
+    // Function to update song details and play the song
     function updateSongDetails() {
         const currentSong = songs[currentSongIndex];
         songTitle.innerText = currentSong.title;
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Construct the audio source based on the title of the song
         const audioFilePath = `songs/${currentSong.title.replace(/\s+/g, '')}.mp3`; // Removes spaces in the title for the file path
         audioElement.src = audioFilePath;
-        audioElement.play();
+        audioElement.play();  // Play the song immediately after setting the source
     }
 
     // Function to change to the next song
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners for the buttons
     nextBtn.addEventListener('click', nextSong);
     prevBtn.addEventListener('click', prevSong);
-    audioElement.addEventListener('ended', nextSong);
+    audioElement.addEventListener('ended', nextSong);  // Automatically play the next song when the current one ends
 
     // Start Playlist when the start button is clicked
     startBtn.addEventListener('click', function() {

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             songs = await response.json();
             if (songs.length > 0) {
                 currentIndex = 0;
-                updateUI(true); // Start with the first song
+                updateUI(true);
             }
         } catch (error) {
             console.error("Error fetching song list:", error);
@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         songTitle.innerText = track.title;
         songDescription.innerText = track.description;
 
-        // Ensure section becomes visible
-        songSection.classList.add("active");
+        songSection.classList.add("active"); // Show section
 
+        // Ensure buttons always show correctly
         prevBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
         nextBtn.style.display = currentIndex === songs.length - 1 ? "none" : "inline-block";
 
@@ -85,6 +85,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    function previousSong() {
+        fadeOutAudio(() => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateUI(true);
+            }
+        });
+    }
+
     function togglePlayPause() {
         if (audioPlayer.paused) {
             audioPlayer.play();
@@ -95,28 +104,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    prevBtn.addEventListener("click", () => {
-        if (currentIndex > 0) {
-            fadeOutAudio(() => {
-                currentIndex--;
-                updateUI(true);
-            });
-        }
-    });
-
-    nextBtn.addEventListener("click", () => {
-        nextSong();
-    });
-
+    prevBtn.addEventListener("click", previousSong);
+    nextBtn.addEventListener("click", nextSong);
     playPauseBtn.addEventListener("click", togglePlayPause);
     audioPlayer.addEventListener("ended", nextSong);
 
     startBtn.addEventListener("click", () => {
         welcomeMessage.classList.add("hidden");
         content.classList.remove("hidden");
-        songSection.classList.add("active"); // Show the song section
+        songSection.classList.add("active");
         fetchSongs();
     });
 
-    content.classList.add("hidden"); // Hide content initially
+    content.classList.add("hidden");
 });

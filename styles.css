@@ -147,6 +147,61 @@ button:hover {
     padding: 12px 20px;
 }
 
+/* Full Playlist Screen */
+#full-playlist-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#full-playlist-screen h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #b71550;
+}
+
+/* Playlist List */
+#playlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+#playlist li {
+    font-size: 1.2rem;
+    color: #7a1b39;
+    margin: 10px 0;
+}
+
+#playlist a {
+    color: #d81b60;
+    text-decoration: none;
+}
+
+#playlist a:hover {
+    text-decoration: underline;
+}
+
+/* Back to Player Button */
+#back-to-player-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #ff4081;
+    border-radius: 30px;
+}
+
+#back-to-player-btn:hover {
+    background: #e91e63;
+}
+
 /* No longer need to hide buttons using a hidden class, we'll manage visibility in JS */
 
 /* Responsive Design */
@@ -163,5 +218,9 @@ button:hover {
     button {
         font-size: 16px;
         padding: 10px 15px;
+    }
+
+    #full-playlist-screen {
+        width: 90%;
     }
 }

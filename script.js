@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             songs = data;  // Store the songs data
-            console.log(songs); // Check the data to ensure it's loaded
+            console.log('Songs loaded:', songs); // Check the data to ensure it's loaded
             startBtn.style.display = 'block';  // Show the start button once songs are loaded
         })
         .catch(err => {
@@ -63,12 +63,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Start Playlist when the start button is clicked
     startBtn.addEventListener('click', function() {
         startPlaylist();
+        startBtn.style.display = 'none'; // Hide the start button after the playlist starts
     });
 
     // Automatically start the playlist after the page is loaded (if songs are available)
     window.onload = function() {
         if (songs.length > 0) {
             startPlaylist();
+            startBtn.style.display = 'none'; // Hide the start button once the playlist starts
         }
     };
 });

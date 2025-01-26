@@ -123,6 +123,8 @@ function updatePlaylistList() {
         listItem.appendChild(link);
         playlistList.appendChild(listItem);
     });
+
+    console.log("Playlist updated", songs); // Debug log to confirm playlist is updated
 }
 
 // Event listener for the start button
@@ -172,6 +174,7 @@ startOverButton.addEventListener('click', () => {
 
 // Event listener for the "Full Playlist" button
 fullPlaylistButton.addEventListener('click', () => {
+    console.log("Full Playlist button clicked");
     // Stop the current song before showing the playlist
     audioPlayer.pause();
     audioPlayer.currentTime = 0;

@@ -3,37 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Playlist</title>
-    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Valentine's Playlist</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
-
     <!-- Welcome Screen -->
-    <div id="welcome-screen">
-        <h1>Welcome to My Valentine's Playlist</h1>
+    <div id="welcome-screen" class="center-content">
+        <h1>Welcome to Our Valentine's Playlist</h1>
         <button id="start-btn">Start Playlist</button>
     </div>
 
     <!-- Playlist Screen -->
-    <div id="playlist-screen" class="hidden">
-        <div class="center-content">
-            <h2 id="song-title"></h2>
-            <p id="artist-name"></p>
-            <p id="song-meaning"></p>
-            <div id="song-lyrics"></div>
+    <div id="playlist-screen" class="center-content">
+        <h2 id="song-title"></h2>
+        <p id="artist-name"></p>
+        <p id="song-meaning"></p>
+        <div id="song-lyrics"></div>
 
-            <audio id="audio-player" controls>
-                <source id="audio-source" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
+        <audio id="audio-player" controls>
+            <source id="audio-source" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
 
-            <div class="controls">
-                <button id="prev-btn">Previous</button>
-                <button id="next-btn">Next</button>
-            </div>
+        <div>
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/scripts/playlist.js"></script>
 </body>
 </html>

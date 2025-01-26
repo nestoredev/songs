@@ -45,15 +45,15 @@ function loadSong(songIndex) {
 
     // Show or hide buttons based on song position
     if (currentSongIndex === 0) {
-        prevButton.style.display = 'none'; // Hide previous button on the first song
+        prevButton.classList.add('hidden'); // Hide previous button on the first song
     } else {
-        prevButton.style.display = 'block'; // Show previous button on other songs
+        prevButton.classList.remove('hidden'); // Show previous button on other songs
     }
 
     if (currentSongIndex === songs.length - 1) {
-        nextButton.style.display = 'none'; // Hide next button on the last song
+        nextButton.classList.add('hidden'); // Hide next button on the last song
     } else {
-        nextButton.style.display = 'block'; // Show next button on other songs
+        nextButton.classList.remove('hidden'); // Show next button on other songs
     }
 }
 

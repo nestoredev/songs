@@ -132,16 +132,6 @@ button:hover {
     padding: 12px 20px;
 }
 
-/* Hide previous button on the first song */
-#prev-btn.hidden {
-    display: none;
-}
-
-/* Hide next button on the last song */
-#next-btn.hidden {
-    display: none;
-}
-
 /* Responsive Design */
 @media (max-width: 600px) {
     #playlist-screen {

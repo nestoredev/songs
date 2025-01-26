@@ -36,7 +36,6 @@ async function loadSongs() {
 // Function to fetch lyrics from Lyrics.ovh API
 async function fetchLyrics(title, artist) {
     try {
-        // Use encodeURIComponent to ensure spaces are encoded in the query
         const lyricsResponse = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
 
         if (!lyricsResponse.ok) {

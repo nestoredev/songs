@@ -9,13 +9,15 @@ const audioSource = document.getElementById("audio-source");
 
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
+const welcomeScreen = document.getElementById("welcome-screen");
+const playlistScreen = document.getElementById("playlist-screen");
+const startBtn = document.getElementById("start-btn");
 
 // Fetch song data from the JSON file
 fetch('songs.json')
     .then(response => response.json())
     .then(data => {
         songs = data;
-        loadSong(songs[currentSongIndex]);  // Load the first song
     })
     .catch(error => {
         console.error('Error loading song data:', error);
@@ -40,6 +42,18 @@ function playPrevSong() {
     loadSong(songs[currentSongIndex]);
     audioPlayer.play();
 }
+
+// Play button on the welcome screen
+startBtn.addEventListener('click', () => {
+    welcomeScreen.style.opacity = 0; // Fade out the welcome screen
+    setTimeout(() => {
+        welcomeScreen.style.display = 'none'; // Hide the welcome screen
+        playlistScreen.classList.remove('hidden'); // Show the playlist screen
+        playlistScreen.style.opacity = 1; // Fade in the playlist screen
+        loadSong(songs[currentSongIndex]); // Load the first song
+        audioPlayer.play();
+    }, 1000); // Wait for fade-out to finish before hiding
+});
 
 audioPlayer.addEventListener('ended', playNextSong);
 

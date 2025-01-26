@@ -1,79 +1,54 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let currentSongIndex = 0;
-    const songElements = document.querySelectorAll('.song-section');
-    const audioElement = document.getElementById('audioPlayer');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const welcomeMessage = document.getElementById('welcomeMessage');
-    const startBtn = document.getElementById('startBtn');
-    const songTitle = document.getElementById('songTitle');
-    const songArtist = document.getElementById('songArtist');
-    const songDescription = document.getElementById('songDescription');
-    
-    let songs = [];
+const songs = [
+    {
+        title: "Song 1",
+        albumArt: "url-to-album-art1.jpg",
+        meaning: "The meaning behind Song 1...",
+        mp3: "path-to-song1.mp3"
+    },
+    {
+        title: "Song 2",
+        albumArt: "url-to-album-art2.jpg",
+        meaning: "The meaning behind Song 2...",
+        mp3: "path-to-song2.mp3"
+    },
+    // Add more songs as needed
+];
 
-    // Fetch songs from the JSON file
-    fetch('songs.json')
-        .then(response => response.json())
-        .then(data => {
-            songs = data;  // Store the songs data
-            console.log('Songs loaded:', songs); // Check the data to ensure it's loaded
-            startBtn.style.display = 'block';  // Show the start button once songs are loaded
-        })
-        .catch(err => {
-            console.error('Error loading songs:', err);
-        });
+let currentSongIndex = 0;
 
-    // Function to update song details and play the song
-    function updateSongDetails() {
-        const currentSong = songs[currentSongIndex];
-        songTitle.innerText = currentSong.title;
-        songArtist.innerText = currentSong.artist;
-        songDescription.innerText = currentSong.description;
+const songTitle = document.getElementById("song-title");
+const albumArt = document.getElementById("album-art");
+const songMeaning = document.getElementById("song-meaning");
+const audioPlayer = document.getElementById("audio-player");
+const audioSource = document.getElementById("audio-source");
 
-        // Construct the audio source based on the title of the song
-        const audioFilePath = `songs/${currentSong.title.replace(/\s+/g, '')}.mp3`; // Removes spaces in the title for the file path
-        audioElement.src = audioFilePath;
-        audioElement.play();  // Play the song immediately after setting the source
-    }
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
 
-    // Function to change to the next song
-    function nextSong() {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        updateSongDetails();
-    }
+function loadSong(song) {
+    songTitle.textContent = song.title;
+    albumArt.src = song.albumArt;
+    songMeaning.textContent = song.meaning;
+    audioSource.src = song.mp3;
+    audioPlayer.load();
+}
 
-    // Function to change to the previous song
-    function prevSong() {
-        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-        updateSongDetails();
-    }
+function playNextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    loadSong(songs[currentSongIndex]);
+    audioPlayer.play();
+}
 
-    // Hide the welcome message and show the first song
-    function startPlaylist() {
-        if (songs.length > 0) {
-            welcomeMessage.style.display = 'none'; // Hide welcome message
-            songElements[0].classList.add('active'); // Show the first song
-            updateSongDetails(); // Start playing the first song
-        }
-    }
+function playPrevSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    loadSong(songs[currentSongIndex]);
+    audioPlayer.play();
+}
 
-    // Event listeners for the buttons
-    nextBtn.addEventListener('click', nextSong);
-    prevBtn.addEventListener('click', prevSong);
-    audioElement.addEventListener('ended', nextSong);  // Automatically play the next song when the current one ends
+audioPlayer.addEventListener('ended', playNextSong);
 
-    // Start Playlist when the start button is clicked
-    startBtn.addEventListener('click', function() {
-        startPlaylist();
-        startBtn.style.display = 'none'; // Hide the start button after the playlist starts
-    });
+prevBtn.addEventListener('click', playPrevSong);
+nextBtn.addEventListener('click', playNextSong);
 
-    // Automatically start the playlist after the page is loaded (if songs are available)
-    window.onload = function() {
-        if (songs.length > 0) {
-            startPlaylist();
-            startBtn.style.display = 'none'; // Hide the start button once the playlist starts
-        }
-    };
-});
+// Initialize the first song
+loadSong(songs[currentSongIndex]);

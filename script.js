@@ -3,7 +3,9 @@ let currentSongIndex = 0;
 
 const songTitle = document.getElementById("song-title");
 const albumArt = document.getElementById("album-art");
+const artistName = document.getElementById("artist-name");
 const songMeaning = document.getElementById("song-meaning");
+const songLyrics = document.getElementById("song-lyrics");
 const audioPlayer = document.getElementById("audio-player");
 const audioSource = document.getElementById("audio-source");
 
@@ -24,11 +26,16 @@ fetch('songs.json')
     });
 
 function loadSong(song) {
-    songTitle.textContent = song.title;
-    albumArt.src = song.albumArt;
-    songMeaning.textContent = song.meaning;
-    audioSource.src = song.mp3;
-    audioPlayer.load();
+    songTitle.textContent = song.title; // Title of the song
+    albumArt.src = song.albumArt; // Album art
+    artistName.textContent = `Artist: ${song.artist}`; // Artist name
+    songMeaning.textContent = song.meaning; // Song meaning
+    
+    // Replace line breaks with <br> in the lyrics
+    songLyrics.innerHTML = song.lyrics.replace(/\n/g, '<br>'); // Lyrics with line breaks
+    
+    audioSource.src = song.mp3; // Song MP3 source
+    audioPlayer.load(); // Reload audio player
 }
 
 function playNextSong() {

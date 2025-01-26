@@ -14,10 +14,14 @@ const nextButton = document.getElementById('next-btn');
 let currentSongIndex = 0; // Track the current song index
 let songs = []; // Store songs globally
 
+// Genius API setup
+const GENIUS_API_KEY = 'mQHb9mFQpoeCIvl34ioZr7Pkl6lQ4PloTDovbk2QIjH5qYeCOuLiirFO0RcL519-'; // Replace with your actual Genius API key
+const GENIUS_API_URL = 'https://api.genius.com';
+
 // Function to load song data from JSON file
 async function loadSongs() {
     try {
-        const response = await fetch('songs.json'); // Correct reference to the main directory
+        const response = await fetch('songs.json');
         if (!response.ok) {
             throw new Error('Failed to load songs');
         }
@@ -28,8 +32,37 @@ async function loadSongs() {
     }
 }
 
+// Function to fetch lyrics from Genius API
+async function fetchLyrics(title, artist) {
+    try {
+        const searchResponse = await fetch(`${GENIUS_API_URL}/search?q=${title} ${artist}`, {
+            headers: {
+                Authorization: `Bearer ${GENIUS_API_KEY}`,
+            },
+        });
+
+        const searchData = await searchResponse.json();
+        const songPath = searchData.response.hits[0].result.path;
+
+        // Get the lyrics
+        const lyricsResponse = await fetch(`https://genius.com${songPath}`);
+        const lyricsPage = await lyricsResponse.text();
+
+        // Use a regular expression to extract the lyrics
+        const lyricsMatch = lyricsPage.match(/<div class="lyrics">([\s\S]*?)<\/div>/);
+        if (lyricsMatch && lyricsMatch[1]) {
+            return lyricsMatch[1].replace(/<br>/g, '\n'); // Clean up HTML <br> tags
+        } else {
+            return 'Lyrics not found.';
+        }
+    } catch (error) {
+        console.error("Error fetching lyrics:", error);
+        return 'Lyrics not available.';
+    }
+}
+
 // Function to load and display a song
-function loadSong(songIndex) {
+async function loadSong(songIndex) {
     if (songs.length === 0) return; // Prevent errors if songs are not loaded
 
     const song = songs[songIndex];
@@ -37,7 +70,10 @@ function loadSong(songIndex) {
     songTitle.textContent = song.title;
     artistName.textContent = `Artist: ${song.artist}`;
     songMeaning.textContent = `Meaning: ${song.meaning}`;
-    songLyrics.innerHTML = song.lyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
+
+    // Fetch lyrics from Genius API
+    const lyrics = await fetchLyrics(song.title, song.artist);
+    songLyrics.innerHTML = lyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
 
     // Set the audio source
     audioSource.src = song.file;

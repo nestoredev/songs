@@ -117,21 +117,32 @@ button:hover {
     background: #e91e63;
 }
 
-/* Button Container for Previous, Next, and Start Over buttons */
+/* Button Container for Previous & Next buttons */
 .button-container {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
     justify-content: center;
-    align-items: center;
     width: 100%;
 }
 
 /* Previous & Next Button Styles */
 #prev-btn,
-#next-btn,
-#start-over-btn { /* Added style for Start Over button */
+#next-btn {
     display: inline-block;
     margin: 10px;
+    padding: 12px 20px;
+}
+
+/* Start Over Button Container */
+.start-over-container {
+    display: flex;
+    flex-direction: column; /* Stack Start Over button vertically */
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Start Over Button */
+#start-over-btn {
+    margin-top: 10px;
     padding: 12px 20px;
 }
 

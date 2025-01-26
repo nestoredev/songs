@@ -53,8 +53,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (songs.length === 0) return;
         
         const track = songs[currentIndex];
+        const encodedFileName = encodeURIComponent(track.name) + ".mp3"; // Encode spaces & special characters
+        audioPlayer.src = `songs/${encodedFileName}`;
         songDescription.innerHTML = `<strong>${track.title}</strong> by ${track.artist}<br>${track.description}`;
-        audioPlayer.src = `songs/${track.name}.mp3`;
 
         if (playNext) {
             fadeInAudio();

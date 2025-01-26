@@ -1,7 +1,7 @@
 /* General Styling */
 body {
     background-color: #ffe6eb; /* Soft pink background */
-    color: #5a1a2c; /* Deep romantic red for text */
+    color: #5a1a2c; /* Deep romantic red */
     font-family: 'Arial', sans-serif;
     text-align: center;
     margin: 0;
@@ -15,7 +15,7 @@ body {
 
 /* Welcome Screen */
 #welcome-screen {
-    opacity: 1;
+    opacity: 1; /* Ensure it's fully visible initially */
     transition: opacity 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -33,9 +33,12 @@ body {
 
 /* Playlist Screen */
 #playlist-screen {
-    display: none;
+    display: none; /* Hidden until triggered */
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 80%;
     max-width: 600px;
     background: #ffffff;
@@ -49,12 +52,13 @@ body {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #b71550; /* Deep romantic red */
 }
 
 #artist-name {
     font-size: 1.2rem;
     color: #7a1b39; /* Soft wine red */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 #song-meaning {
@@ -73,7 +77,8 @@ body {
     max-height: 200px;
     overflow-y: auto;
     text-align: left;
-    white-space: pre-wrap; /* Ensures proper line breaks */
+    white-space: pre-wrap; /* Preserves line breaks */
+    border: 1px solid #ff80ab;
 }
 
 /* Audio Player */
@@ -92,13 +97,15 @@ button {
     font-size: 18px;
     cursor: pointer;
     border-radius: 25px;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
 button:hover {
     background: #b71550;
+    transform: scale(1.05);
 }
 
+/* Start Playlist Button */
 #start-btn {
     font-size: 22px;
     padding: 15px 30px;

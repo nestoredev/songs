@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextBtn = document.getElementById("nextBtn");
     const playPauseBtn = document.getElementById("playPauseBtn");
     const songTitle = document.getElementById("songTitle");
+    const songArtist = document.getElementById("songArtist"); // New element for the artist
     const songDescription = document.getElementById("songDescription");
     const audioPlayer = document.getElementById("audioPlayer");
     const songSection = document.querySelector(".song-section");
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Update the UI with the song title, description, and audio
+    // Update the UI with the song title, artist, description, and audio
     function updateUI() {
         if (songs.length === 0) return;
 
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const encodedFileName = encodeURIComponent(track.name) + ".mp3";
         audioPlayer.src = `songs/${encodedFileName}`;
         songTitle.innerText = track.title;
+        songArtist.innerText = track.artist; // Set the artist name
         songDescription.innerText = track.description;
 
         // Display the song section and update button visibility

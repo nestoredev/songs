@@ -4,7 +4,8 @@
         "artist": "Coldplay",
         "albumArt": "assets/images/album1.jpg",
         "meaning": "The meaning behind Song 1...",
-        "lyrics": "",
+        "lyrics": "These are the lyrics
+        they are so good",
         "mp3": "assets/music/All-My-Love.mp3"
     },
     {

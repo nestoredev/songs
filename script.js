@@ -18,7 +18,11 @@ let songs = []; // Store songs globally
 async function loadSongs() {
     try {
         const response = await fetch('songs.json'); // Correct reference to the main directory
+        if (!response.ok) {
+            throw new Error('Failed to load songs');
+        }
         songs = await response.json();
+        console.log("Songs loaded:", songs); // Debug log to see the song data
     } catch (error) {
         console.error("Error loading the songs data:", error);
     }

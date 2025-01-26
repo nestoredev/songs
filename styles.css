@@ -48,3 +48,13 @@ button:hover {
 .song-section.active {
     opacity: 1;
 }
+
+.player-controls {
+    margin-top: 10px;
+}
+
+.player-controls button {
+    font-size: 24px;
+    margin: 5px;
+    padding: 10px;
+}

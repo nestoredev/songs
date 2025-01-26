@@ -96,6 +96,27 @@ p {
   margin: 0 auto;
 }
 
+/* Lyrics Section */
+.lyrics-section {
+  margin-top: 2rem;
+  text-align: left;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.lyrics-section h3 {
+  font-size: 1.5rem;
+  color: #e91e63;
+  margin-bottom: 1rem;
+}
+
+.lyrics-section p {
+  font-size: 1.1rem;
+  color: #444;
+  white-space: pre-line;
+}
+
+/* Controls */
 .controls {
   margin-top: 2rem;
 }

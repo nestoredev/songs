@@ -42,6 +42,19 @@ function loadSong(songIndex) {
     // Set the audio source
     audioSource.src = song.file;
     audioPlayer.load();
+
+    // Show or hide buttons based on song position
+    if (currentSongIndex === 0) {
+        prevButton.style.display = 'none'; // Hide previous button on the first song
+    } else {
+        prevButton.style.display = 'block'; // Show previous button on other songs
+    }
+
+    if (currentSongIndex === songs.length - 1) {
+        nextButton.style.display = 'none'; // Hide next button on the last song
+    } else {
+        nextButton.style.display = 'block'; // Show next button on other songs
+    }
 }
 
 // Event listener for the start button

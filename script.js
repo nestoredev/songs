@@ -1,19 +1,4 @@
-const songs = [
-    {
-        title: "Song 1",
-        albumArt: "url-to-album-art1.jpg",
-        meaning: "The meaning behind Song 1...",
-        mp3: "path-to-song1.mp3"
-    },
-    {
-        title: "Song 2",
-        albumArt: "url-to-album-art2.jpg",
-        meaning: "The meaning behind Song 2...",
-        mp3: "path-to-song2.mp3"
-    },
-    // Add more songs as needed
-];
-
+let songs = [];
 let currentSongIndex = 0;
 
 const songTitle = document.getElementById("song-title");
@@ -24,6 +9,17 @@ const audioSource = document.getElementById("audio-source");
 
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
+
+// Fetch song data from the JSON file
+fetch('songs.json')
+    .then(response => response.json())
+    .then(data => {
+        songs = data;
+        loadSong(songs[currentSongIndex]);  // Load the first song
+    })
+    .catch(error => {
+        console.error('Error loading song data:', error);
+    });
 
 function loadSong(song) {
     songTitle.textContent = song.title;
@@ -49,6 +45,3 @@ audioPlayer.addEventListener('ended', playNextSong);
 
 prevBtn.addEventListener('click', playPrevSong);
 nextBtn.addEventListener('click', playNextSong);
-
-// Initialize the first song
-loadSong(songs[currentSongIndex]);

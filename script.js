@@ -35,7 +35,8 @@ async function loadSongs() {
 // Function to fetch lyrics from Genius API
 async function fetchLyrics(title, artist) {
     try {
-        const searchResponse = await fetch(`${GENIUS_API_URL}/search?q=${title} ${artist}`, {
+        // Use encodeURIComponent to ensure spaces are encoded in the query
+        const searchResponse = await fetch(`${GENIUS_API_URL}/search?q=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`, {
             headers: {
                 Authorization: `Bearer ${GENIUS_API_KEY}`,
             },

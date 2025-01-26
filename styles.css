@@ -1,8 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #ff758c, #ff7eb3);
-    color: white;
+    background: #ffedf4; /* Soft pink background */
+    color: #333; /* Dark gray for readability */
     margin: 0;
     padding: 0;
     display: flex;
@@ -15,13 +15,14 @@ body {
 .welcome-message {
     max-width: 600px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.3);
+    background: white;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    background-color: white;
-    color: #ff4081;
+    background-color: #ff4081;
+    color: white;
     border: none;
     padding: 10px 20px;
     font-size: 18px;
@@ -32,7 +33,7 @@ button {
 }
 
 button:hover {
-    background-color: #ffebee;
+    background-color: #d81b60;
 }
 
 .hidden {
@@ -41,13 +42,13 @@ button:hover {
 
 .song-section {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.8s ease-in-out;
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    background: white;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     display: none;
 }
 
@@ -58,26 +59,31 @@ button:hover {
 
 h2#songTitle {
     color: #ff4081;
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 p#songDescription {
-    color: black;
+    color: #555;
     font-size: 18px;
     font-weight: 500;
 }
 
 .player-controls {
-    margin-top: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .player-controls button {
-    font-size: 20px;
-    margin: 5px;
+    font-size: 18px;
     padding: 10px;
     background-color: #ff4081;
     color: white;
     border: none;
+    border-radius: 5px;
 }
 
 .player-controls button:hover {

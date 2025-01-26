@@ -3,33 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Songs Playlist</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Love Songs for Us</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>A Playlist for You</h1>
+    </header>
 
-<!-- Welcome Message -->
-<div id="welcomeMessage" class="welcome-message">
-    Welcome! Let's start our playlist of special love songs.
-</div>
-
-<!-- Start Playlist Button -->
-<button id="startBtn">Start Playlist</button>
-
-<!-- Song Information & Controls -->
-<div class="container">
-    <div class="song-section" id="song1">
-        <h2 id="songTitle"></h2>
-        <p id="songArtist"></p>
-        <p id="songDescription"></p>
-        <audio id="audioPlayer" controls></audio>
-        <div class="controls">
-            <button id="prevBtn">Previous</button>
-            <button id="nextBtn">Next</button>
+    <div class="song-container">
+        <div class="song-info">
+            <h2 id="song-title">Song Title</h2>
+            <img id="album-art" src="" alt="Album Art">
+            <p id="song-meaning">Song meaning goes here...</p>
+        </div>
+        
+        <div class="audio-player">
+            <audio id="audio-player" controls>
+                <source id="audio-source" src="" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="controls">
+                <button id="prev-btn">Prev</button>
+                <button id="next-btn">Next</button>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <footer>
+        <p>Made with love for you, always.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

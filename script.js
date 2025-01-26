@@ -1,12 +1,22 @@
 document.addEventListener("DOMContentLoaded", function() {
     let currentSongIndex = 0;
-    const songs = []; // Populate this array with your song data
+    const songs = [
+        {
+            title: "All My Love",
+            artist: "Led Zeppelin",
+            description: "A song that reminds me of the special bond we share.",
+            audioSrc: "songs/AllMyLove.mp3"
+        },
+        // Add more song objects here if needed
+    ];
+
     const songElements = document.querySelectorAll('.song-section');
     const audioElement = document.getElementById('audioPlayer');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const welcomeMessage = document.getElementById('welcomeMessage');
+    const startBtn = document.getElementById('startBtn');
 
     // Function to update song details
     function updateSongDetails() {
@@ -51,8 +61,11 @@ document.addEventListener("DOMContentLoaded", function() {
     audioElement.addEventListener('ended', nextSong);
 
     // Start Playlist when user clicks start button
-    document.getElementById('startBtn').addEventListener('click', startPlaylist);
+    startBtn.addEventListener('click', function() {
+        startPlaylist();
+    });
 
-    // Load first song automatically
+    // Start Playlist automatically once the page is loaded
+    // This will be useful for autoplay as soon as the page loads
     startPlaylist();
 });

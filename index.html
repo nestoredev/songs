@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine's Playlist</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Playlist</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div id="welcome-screen">
-    <div class="welcome-content">
-      <h1>Welcome to Your Valentine's Playlist</h1>
-      <p>Click below to start the journey of love...</p>
-      <button id="start-btn" class="btn">Start Playlist</button>
-    </div>
-  </div>
 
-  <!-- Playlist Screen -->
-  <div id="playlist-screen" class="hidden">
-    <div class="song-info">
-      <img id="album-art" src="" alt="Album Art">
-      <div>
-        <h2 id="song-title"></h2>
-        <p id="artist-name"></p> <!-- Artist Name -->
-        <p id="song-meaning"></p> <!-- Song Meaning -->
-      </div>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <h1>Welcome to My Valentine's Playlist</h1>
+        <button id="start-btn">Start Playlist</button>
     </div>
 
-    <audio id="audio-player" controls>
-      <source id="audio-source" type="audio/mp3">
-    </audio>
+    <!-- Playlist Screen -->
+    <div id="playlist-screen" class="hidden">
+        <div class="center-content">
+            <img id="album-art" class="default" alt="Album Art">
+            <h2 id="song-title"></h2>
+            <p id="artist-name"></p>
+            <p id="song-meaning"></p>
+            <div id="song-lyrics"></div>
 
-    <!-- Lyrics Section -->
-    <div id="lyrics-section" class="lyrics-section">
-      <h3>Lyrics:</h3>
-      <p id="song-lyrics"></p> <!-- Lyrics -->
+            <audio id="audio-player" controls>
+                <source id="audio-source" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+
+            <div class="controls">
+                <button id="prev-btn">Previous</button>
+                <button id="next-btn">Next</button>
+            </div>
+        </div>
     </div>
 
-    <div class="controls">
-      <button id="prev-btn" class="btn">Previous</button>
-      <button id="next-btn" class="btn">Next</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

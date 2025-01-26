@@ -1,126 +1,128 @@
-/* Global Styles */
+/* General Styling */
 body {
+    background-color: #ffe6eb; /* Soft pink background */
+    color: #5a1a2c; /* Deep romantic red for text */
     font-family: 'Arial', sans-serif;
-    background-color: #fce4ec;  /* Light pink background */
-    color: #333;
+    text-align: center;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
 }
 
-h1, h2 {
-    font-family: 'Georgia', serif;
-    color: #d81b60;  /* Bold pink for the title */
-}
-
-button {
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #f48fb1;  /* Soft pink button color */
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 25px;  /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #c2185b;  /* Darker pink on hover */
-}
-
-/* Welcome Screen Styles */
+/* Welcome Screen */
 #welcome-screen {
-    text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    transition: opacity 1s ease;
+    width: 100%;
+    height: 100vh;
 }
 
 #welcome-screen h1 {
-    font-size: 48px;
-    margin-bottom: 30px;
-    color: #c2185b;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #c2185b; /* Vibrant pink */
 }
 
-/* Playlist Screen Styles */
+/* Playlist Screen */
 #playlist-screen {
     display: none;
-    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 80%;
     max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
+    background: #ffffff;
     padding: 20px;
-    background-color: #ffffff;  /* White background for the playlist screen */
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Song Info */
 #song-title {
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: bold;
-    color: #d81b60;  /* Bold pink for the title */
     margin-bottom: 10px;
 }
 
 #artist-name {
-    font-size: 18px;
-    color: #757575;  /* Grey for artist name */
+    font-size: 1.2rem;
+    color: #7a1b39; /* Soft wine red */
     margin-bottom: 15px;
 }
 
 #song-meaning {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-#song-lyrics {
-    font-size: 14px;
-    color: #444;
-    white-space: pre-wrap;
+    font-style: italic;
+    font-size: 1rem;
     margin-bottom: 20px;
 }
 
-#song-lyrics br {
-    margin-bottom: 10px;
-}
-
-/* Player Controls */
-#prev-btn, #next-btn {
-    padding: 15px;
-    margin: 10px;
-    font-size: 16px;
-    background-color: #f48fb1;  /* Soft pink */
-    border: none;
-    border-radius: 25px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#prev-btn:hover, #next-btn:hover {
-    background-color: #c2185b;  /* Darker pink on hover */
-}
-
-#prev-btn:disabled, #next-btn:disabled {
-    background-color: #e0e0e0;  /* Grey out disabled buttons */
-    cursor: not-allowed;
+/* Lyrics */
+#song-lyrics {
+    font-size: 1rem;
+    color: #444;
+    background: #ffebf0;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    white-space: pre-wrap; /* Ensures proper line breaks */
 }
 
 /* Audio Player */
-audio {
-    margin-top: 20px;
+#audio-player {
     width: 100%;
-    max-width: 500px;
-    border-radius: 15px;
-    background-color: #f8bbd0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+/* Buttons */
+button {
+    background: #d81b60; /* Deep pink */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #b71550;
+}
+
+#start-btn {
+    font-size: 22px;
+    padding: 15px 30px;
+    background: #ff4081;
+    border-radius: 30px;
+}
+
+#start-btn:hover {
+    background: #e91e63;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #playlist-screen {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #song-lyrics {
+        max-height: 150px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
 }

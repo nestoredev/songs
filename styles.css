@@ -132,6 +132,8 @@ button:hover {
     padding: 12px 20px;
 }
 
+/* No longer need to hide buttons using a hidden class, we'll manage visibility in JS */
+
 /* Responsive Design */
 @media (max-width: 600px) {
     #playlist-screen {

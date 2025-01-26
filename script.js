@@ -13,49 +13,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     let songs = [];
     let currentIndex = 0;
 
+    // Fetch songs from the JSON file
     async function fetchSongs() {
         try {
             const response = await fetch("data/songs.json");
             songs = await response.json();
             if (songs.length > 0) {
                 currentIndex = 0;
-                updateUI(true);
+                updateUI();
             }
         } catch (error) {
             console.error("Error fetching song list:", error);
         }
     }
 
-    function fadeOutAudio(callback) {
-        let volume = 1.0;
-        const fade = setInterval(() => {
-            if (volume > 0.05) {
-                volume -= 0.05;
-                audioPlayer.volume = volume;
-            } else {
-                clearInterval(fade);
-                audioPlayer.pause();
-                audioPlayer.volume = 1.0;
-                callback();
-            }
-        }, 100);
-    }
-
-    function fadeInAudio() {
-        audioPlayer.volume = 0;
-        audioPlayer.play();
-        let volume = 0;
-        const fade = setInterval(() => {
-            if (volume < 1.0) {
-                volume += 0.05;
-                audioPlayer.volume = volume;
-            } else {
-                clearInterval(fade);
-            }
-        }, 100);
-    }
-
-    function updateUI(playNext = false) {
+    // Update the UI with the song title, description, and audio
+    function updateUI() {
         if (songs.length === 0) return;
 
         const track = songs[currentIndex];
@@ -64,40 +37,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         songTitle.innerText = track.title;
         songDescription.innerText = track.description;
 
-        songSection.classList.add("active"); // Show section
-
-        // Ensure buttons always show correctly
+        // Display the song section and update button visibility
+        songSection.classList.add("active");
         prevBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
         nextBtn.style.display = currentIndex === songs.length - 1 ? "none" : "inline-block";
+    }
 
-        if (playNext) {
-            fadeInAudio();
-            playPauseBtn.innerText = "⏸️ Pause";
+    // Handle song change when the previous button is clicked
+    function previousSong() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateUI();
         }
     }
 
+    // Handle song change when the next button is clicked
     function nextSong() {
-        fadeOutAudio(() => {
-            if (currentIndex < songs.length - 1) {
-                currentIndex++;
-                updateUI(true);
-            } else {
-                // Loop back to the first song
-                currentIndex = 0;
-                updateUI(true);
-            }
-        });
+        if (currentIndex < songs.length - 1) {
+            currentIndex++;
+            updateUI();
+        } else {
+            // Loop back to the first song if it's the last one
+            currentIndex = 0;
+            updateUI();
+        }
     }
 
-    function previousSong() {
-        fadeOutAudio(() => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateUI(true);
-            }
-        });
-    }
-
+    // Play or pause the song when the play/pause button is clicked
     function togglePlayPause() {
         if (audioPlayer.paused) {
             audioPlayer.play();
@@ -108,15 +74,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // Auto-advance to the next song when the current song ends
+    audioPlayer.addEventListener("ended", nextSong);
+
+    // Event listeners for the buttons
     prevBtn.addEventListener("click", previousSong);
     nextBtn.addEventListener("click", nextSong);
     playPauseBtn.addEventListener("click", togglePlayPause);
-    audioPlayer.addEventListener("ended", nextSong);
 
+    // Event listener to start the music playlist
     startBtn.addEventListener("click", () => {
         welcomeMessage.classList.add("hidden");
         content.classList.remove("hidden");
-        songSection.classList.add("active");
         fetchSongs();
     });
 

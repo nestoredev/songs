@@ -64,6 +64,13 @@ h2#songTitle {
     margin-bottom: 10px;
 }
 
+h3#songArtist {
+    color: #ff4081;
+    font-size: 22px; /* Slightly smaller than the song title */
+    font-weight: normal;
+    margin-bottom: 15px; /* Space between artist and description */
+}
+
 p#songDescription {
     color: #555;
     font-size: 18px;

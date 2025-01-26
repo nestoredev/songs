@@ -1,92 +1,135 @@
-/* General Layout */
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #fff;
+    background-color: #ffe6eb; /* Soft pink background */
+    color: #5a1a2c; /* Deep romantic red */
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 /* Welcome Screen */
 #welcome-screen {
-    text-align: center;
-    opacity: 1;
+    opacity: 1; /* Ensure it's fully visible initially */
     transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#welcome-screen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #c2185b; /* Vibrant pink */
 }
 
 /* Playlist Screen */
 #playlist-screen {
-    display: none;
+    display: none; /* Hidden until triggered */
     opacity: 0;
-    text-align: center;
-    padding: 20px;
+    transition: opacity 0.5s ease-in-out;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 80%;
     max-width: 600px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Title */
+/* Song Info */
 #song-title {
-    font-size: 2em;
+    font-size: 2rem;
+    font-weight: bold;
     margin-bottom: 10px;
-    color: #ff66b2;
+    color: #b71550; /* Deep romantic red */
 }
 
-/* Artist and Meaning */
-#artist-name,
-#song-meaning {
-    font-size: 1.2em;
+#artist-name {
+    font-size: 1.2rem;
+    color: #7a1b39; /* Soft wine red */
     margin-bottom: 10px;
+}
+
+#song-meaning {
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 /* Lyrics */
 #song-lyrics {
-    font-size: 1em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    white-space: pre-line;
+    font-size: 1rem;
+    color: #444;
+    background: #ffebf0;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    white-space: pre-wrap; /* Preserves line breaks */
+    border: 1px solid #ff80ab;
 }
 
 /* Audio Player */
 #audio-player {
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
-/* Button Styles */
+/* Buttons */
 button {
-    background-color: #ff66b2;
+    background: #d81b60; /* Deep pink */
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 25px;
-    transition: background-color 0.3s ease;
-    margin: 0 10px;
+    transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
-/* Button Hover */
 button:hover {
-    background-color: #ff3385;
+    background: #b71550;
+    transform: scale(1.05);
 }
 
-/* Button Container (align buttons side by side) */
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+/* Start Playlist Button */
+#start-btn {
+    font-size: 22px;
+    padding: 15px 30px;
+    background: #ff4081;
+    border-radius: 30px;
 }
 
-/* Previous & Next Button Styles */
-#prev-btn,
-#next-btn {
-    display: inline-block;
+#start-btn:hover {
+    background: #e91e63;
 }
 
-/* Hide buttons by default */
-#prev-btn,
-#next-btn {
-    display: none;
+/* Responsive Design */
+@media (max-width: 600px) {
+    #playlist-screen {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #song-lyrics {
+        max-height: 150px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
 }

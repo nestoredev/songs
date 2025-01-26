@@ -1,14 +1,18 @@
 [
     {
         "title": "All My Love",
+        "artist": "Coldplay",
         "albumArt": "assets/images/album1.jpg",
         "meaning": "The meaning behind Song 1...",
+        "lyrics": "",
         "mp3": "assets/music/All-My-Love.mp3"
     },
     {
         "title": "The Book of Love",
+        "artist": "Peter Gabriel",
         "albumArt": "assets/images/album2.jpg",
         "meaning": "The meaning behind Song 2...",
+        "lyrics": "",
         "mp3": "assets/music/The-Book-of-Love.mp3"
     },
     {

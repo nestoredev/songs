@@ -88,6 +88,9 @@ async function loadSong(songIndex) {
     audioSource.src = song.file;
     audioPlayer.load();
 
+    // Play the audio after loading the song
+    audioPlayer.play();
+
     // Show or hide buttons based on song position
     if (currentSongIndex === 0) {
         prevButton.style.display = 'none'; // Hide previous button on first song
@@ -119,7 +122,7 @@ startButton.addEventListener('click', async () => {
                 playlistScreen.style.opacity = 1; // Fade in the playlist screen
             }, 100);
 
-            loadSong(currentSongIndex);
+            loadSong(currentSongIndex); // Load the first song
         }, 500); // Delay should match CSS transition time
     }
 });

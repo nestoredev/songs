@@ -27,7 +27,7 @@ async function loadSongs() {
 }
 
 // Show the first song
-function loadSong(songIndex, songs) {
+async function loadSong(songIndex, songs) {
     const song = songs[songIndex];
     
     songTitle.textContent = song.title;

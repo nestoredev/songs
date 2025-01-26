@@ -14,10 +14,6 @@ const nextButton = document.getElementById('next-btn');
 let currentSongIndex = 0; // Track the current song index
 let songs = []; // Store songs globally
 
-// Genius API setup
-const GENIUS_API_KEY = 'mQHb9mFQpoeCIvl34ioZr7Pkl6lQ4PloTDovbk2QIjH5qYeCOuLiirFO0RcL519-'; // Replace with your actual Genius API key
-const GENIUS_API_URL = 'https://api.genius.com';
-
 // Function to load song data from JSON file
 async function loadSongs() {
     try {
@@ -32,31 +28,20 @@ async function loadSongs() {
     }
 }
 
-// Function to fetch lyrics from Genius API
+// Function to fetch lyrics from Lyrics.ovh API
 async function fetchLyrics(title, artist) {
     try {
         // Use encodeURIComponent to ensure spaces are encoded in the query
-        const searchResponse = await fetch(`${GENIUS_API_URL}/search?q=${encodeURIComponent(title)}%20${encodeURIComponent(artist)}`, {
-            headers: {
-                Authorization: `Bearer ${GENIUS_API_KEY}`,
-            },
-        });
+        const lyricsResponse = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
 
-        const searchData = await searchResponse.json();
-        const songPath = searchData.response.hits[0]?.result?.path;
-
-        if (!songPath) {
-            return null; // Return null if no song path is found
+        if (!lyricsResponse.ok) {
+            return null; // Return null if the API call fails
         }
 
-        // Get the lyrics from Genius
-        const lyricsResponse = await fetch(`https://genius.com${songPath}`);
-        const lyricsPage = await lyricsResponse.text();
+        const lyricsData = await lyricsResponse.json();
 
-        // Use a regular expression to extract the lyrics
-        const lyricsMatch = lyricsPage.match(/<div class="lyrics">([\s\S]*?)<\/div>/);
-        if (lyricsMatch && lyricsMatch[1]) {
-            return lyricsMatch[1].replace(/<br>/g, '\n'); // Clean up HTML <br> tags
+        if (lyricsData.lyrics) {
+            return lyricsData.lyrics.replace(/(?:\r\n|\r|\n)/g, '\n'); // Clean up line breaks
         } else {
             return null; // Return null if no lyrics found
         }
@@ -76,10 +61,10 @@ async function loadSong(songIndex) {
     artistName.textContent = `Artist: ${song.artist}`;
     songMeaning.textContent = `Meaning: ${song.meaning}`;
 
-    // First, try to fetch lyrics from the Genius API
+    // First, try to fetch lyrics from Lyrics.ovh API
     const lyrics = await fetchLyrics(song.title, song.artist);
 
-    // If no lyrics are found from Genius, fall back to the lyrics in the JSON file
+    // If no lyrics are found from Lyrics.ovh, fall back to the lyrics in the JSON file
     const displayedLyrics = lyrics || song.lyrics || 'Lyrics not available.';
 
     songLyrics.innerHTML = displayedLyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics

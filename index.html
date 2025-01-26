@@ -16,11 +16,15 @@
 
     <div id="content" style="display: none;">
         <div class="song-section">
+            <h2 id="songTitle"></h2>
             <p id="songDescription"></p>
-            <audio id="audioPlayer" controls></audio>
+            <audio id="audioPlayer"></audio>
+            <div class="player-controls">
+                <button id="prevBtn">⏮️ Previous</button>
+                <button id="playPauseBtn">▶️ Play</button>
+                <button id="nextBtn">⏭️ Next</button>
+            </div>
         </div>
-        <button id="prevBtn">Previous</button>
-        <button id="nextBtn">Next</button>
     </div>
 
     <script src="script.js"></script>

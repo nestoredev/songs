@@ -173,6 +173,10 @@ startOverButton.addEventListener('click', () => {
 
 // Event listener for the "Full Playlist" button
 fullPlaylistButton.addEventListener('click', () => {
+    // Stop the current song before showing the playlist
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+
     fullPlaylistScreen.style.display = 'flex'; // Show full playlist screen
     playlistScreen.style.display = 'none'; // Hide the player screen
     updatePlaylistList(); // Update the playlist list with song titles and artists

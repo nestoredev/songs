@@ -51,6 +51,11 @@ function cleanUpLyrics(lyrics) {
     return lyrics.replace(/\n\s*\n/g, '\n').replace(/\n{2,}/g, '\n\n');
 }
 
+// Function to handle line breaks in the favorite lyrics
+function handleLineBreaks(text) {
+    return text.replace(/\n/g, '<br>');
+}
+
 // Function to load and display a song
 async function loadSong(songIndex) {
     if (songs.length === 0) return;
@@ -69,7 +74,8 @@ async function loadSong(songIndex) {
         favoriteLyricsLabel.textContent = "Favorite Lyrics";
         favoriteLyricsLabel.style.fontWeight = "bold";
 
-        favoriteLyricsText.textContent = song.favoriteLyrics;
+        // Handle line breaks in favorite lyrics
+        favoriteLyricsText.innerHTML = handleLineBreaks(song.favoriteLyrics);
         favoriteLyricsContainer.appendChild(favoriteLyricsLabel);
         favoriteLyricsContainer.appendChild(favoriteLyricsText);
         favoriteLyricsContainer.style.marginBottom = "10px";

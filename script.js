@@ -79,6 +79,9 @@ async function loadSong(songIndex) {
 
     songLyrics.innerHTML = cleanedLyrics.replace(/\n/g, '<br>'); // Preserve line breaks in lyrics
 
+     // Scroll lyrics section to the top
+    songLyrics.scrollTo(0, 0);
+
     // Set the audio source
     audioSource.src = song.file;
     audioPlayer.load();

@@ -11,10 +11,6 @@ const audioSource = document.getElementById('audio-source');
 const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
 const startOverButton = document.getElementById('start-over-btn'); // New "Start Over" button
-const fullPlaylistButton = document.getElementById('full-playlist-btn'); // New "Full Playlist" button
-const fullPlaylistScreen = document.getElementById('full-playlist-screen'); // Full Playlist screen
-const backToPlayerButton = document.getElementById('back-to-player-btn'); // Back to player button
-const playlistList = document.getElementById('playlist'); // Playlist list
 
 let currentSongIndex = 0; // Track the current song index
 let songs = []; // Store songs globally
@@ -106,27 +102,6 @@ async function loadSong(songIndex) {
     }
 }
 
-// Function to update the playlist list
-function updatePlaylistList() {
-    playlistList.innerHTML = ''; // Clear existing list
-    songs.forEach((song, index) => {
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-        link.textContent = `${song.title} - ${song.artist}`;
-        link.href = '#';
-        link.addEventListener('click', () => {
-            currentSongIndex = index;
-            loadSong(currentSongIndex);
-            playlistScreen.style.display = 'flex';
-            fullPlaylistScreen.style.display = 'none'; // Hide full playlist screen
-        });
-        listItem.appendChild(link);
-        playlistList.appendChild(listItem);
-    });
-
-    console.log("Playlist updated", songs); // Debug log to confirm playlist is updated
-}
-
 // Event listener for the start button
 startButton.addEventListener('click', async () => {
     await loadSongs();
@@ -170,24 +145,6 @@ startOverButton.addEventListener('click', () => {
     currentSongIndex = 0; // Set the index to the first song
     loadSong(currentSongIndex); // Load the first song
     audioPlayer.play(); // Play the audio
-});
-
-// Event listener for the "Full Playlist" button
-fullPlaylistButton.addEventListener('click', () => {
-    console.log("Full Playlist button clicked");
-    // Stop the current song before showing the playlist
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-
-    fullPlaylistScreen.style.display = 'flex'; // Show full playlist screen
-    playlistScreen.style.display = 'none'; // Hide the player screen
-    updatePlaylistList(); // Update the playlist list with song titles and artists
-});
-
-// Event listener for the "Back to Player" button
-backToPlayerButton.addEventListener('click', () => {
-    fullPlaylistScreen.style.display = 'none'; // Hide full playlist screen
-    playlistScreen.style.display = 'flex'; // Show player screen
 });
 
 // Auto-play next song when the current one ends

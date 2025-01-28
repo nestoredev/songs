@@ -4,16 +4,17 @@ const welcomeScreen = document.getElementById('welcome-screen');
 const playlistScreen = document.getElementById('playlist-screen');
 const songTitle = document.getElementById('song-title');
 const artistName = document.getElementById('artist-name');
-const songMeaning = document.getElementById('song-meaning');
+const songMeaning = document.getElementById('song-meaning'); // This will now display meaning without "Meaning:"
+const favoriteLyrics = document.createElement('p'); // Create new element for favorite lyrics
 const songLyrics = document.getElementById('song-lyrics');
 const audioPlayer = document.getElementById('audio-player');
 const audioSource = document.getElementById('audio-source');
 const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
-const startOverButton = document.getElementById('start-over-btn'); // "Start Over" button
+const startOverButton = document.getElementById('start-over-btn');
 
-let currentSongIndex = 0; // Track the current song index
-let songs = []; // Store songs globally
+let currentSongIndex = 0;
+let songs = [];
 
 // Function to load song data from JSON file
 async function loadSongs() {
@@ -55,7 +56,13 @@ async function loadSong(songIndex) {
 
     songTitle.textContent = song.title;
     artistName.textContent = `Artist: ${song.artist}`;
-    songMeaning.textContent = `Meaning: ${song.meaning}`;
+
+    // Set meaning text in italics
+    songMeaning.innerHTML = `<em>${song.meaning}</em>`;
+
+    // Set favorite lyrics if available
+    favoriteLyrics.textContent = song.favoriteLyrics ? `Favorite Lyrics: "${song.favoriteLyrics}"` : "";
+    favoriteLyrics.style.fontWeight = "bold"; // Make "Favorite Lyrics" bold
 
     const lyrics = await fetchLyrics(song.title, song.artist);
     const displayedLyrics = lyrics || song.lyrics || 'Lyrics not available.';
@@ -63,6 +70,9 @@ async function loadSong(songIndex) {
 
     // Scroll lyrics section to the top
     songLyrics.scrollTop = 0;
+
+    // Insert favorite lyrics section before the lyrics box
+    songLyrics.parentNode.insertBefore(favoriteLyrics, songLyrics);
 
     // Set the audio source
     audioSource.src = song.file;

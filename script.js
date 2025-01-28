@@ -4,8 +4,10 @@ const welcomeScreen = document.getElementById('welcome-screen');
 const playlistScreen = document.getElementById('playlist-screen');
 const songTitle = document.getElementById('song-title');
 const artistName = document.getElementById('artist-name');
-const songMeaning = document.getElementById('song-meaning'); // This will now display meaning without "Meaning:"
-const favoriteLyrics = document.createElement('p'); // Create new element for favorite lyrics
+const songMeaning = document.getElementById('song-meaning'); 
+const favoriteLyricsContainer = document.createElement('div'); // Container for favorite lyrics
+const favoriteLyricsLabel = document.createElement('p'); // Label for "Favorite Lyrics"
+const favoriteLyricsText = document.createElement('p'); // Text for favorite lyrics
 const songLyrics = document.getElementById('song-lyrics');
 const audioPlayer = document.getElementById('audio-player');
 const audioSource = document.getElementById('audio-source');
@@ -22,24 +24,8 @@ async function loadSongs() {
         const response = await fetch('songs.json');
         if (!response.ok) throw new Error('Failed to load songs');
         songs = await response.json();
-        console.log("Songs loaded:", songs);
     } catch (error) {
         console.error("Error loading the songs data:", error);
-    }
-}
-
-// Function to fetch lyrics from Lyrics.ovh API
-async function fetchLyrics(title, artist) {
-    try {
-        const lyricsResponse = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
-
-        if (!lyricsResponse.ok) return null;
-
-        const lyricsData = await lyricsResponse.json();
-        return lyricsData.lyrics ? lyricsData.lyrics.replace(/(?:\r\n|\r|\n)/g, '\n') : null;
-    } catch (error) {
-        console.error("Error fetching lyrics:", error);
-        return null;
     }
 }
 
@@ -56,53 +42,52 @@ async function loadSong(songIndex) {
 
     songTitle.textContent = song.title;
     artistName.textContent = `Artist: ${song.artist}`;
-
-    // Set meaning text in italics
     songMeaning.innerHTML = `<em>${song.meaning}</em>`;
 
-    // Set favorite lyrics if available
-    favoriteLyrics.textContent = song.favoriteLyrics ? `Favorite Lyrics: "${song.favoriteLyrics}"` : "";
-    favoriteLyrics.style.fontWeight = "bold"; // Make "Favorite Lyrics" bold
+    // Favorite Lyrics Section
+    if (song.favoriteLyrics) {
+        favoriteLyricsLabel.textContent = "Favorite Lyrics";
+        favoriteLyricsLabel.style.fontWeight = "bold"; 
+        favoriteLyricsText.textContent = song.favoriteLyrics;
+        favoriteLyricsContainer.innerHTML = ''; // Clear previous content
+        favoriteLyricsContainer.appendChild(favoriteLyricsLabel);
+        favoriteLyricsContainer.appendChild(favoriteLyricsText);
+        favoriteLyricsContainer.style.marginBottom = "10px";
+    } else {
+        favoriteLyricsContainer.innerHTML = ''; // Remove if no favorite lyrics
+    }
 
-    const lyrics = await fetchLyrics(song.title, song.artist);
-    const displayedLyrics = lyrics || song.lyrics || 'Lyrics not available.';
-    songLyrics.innerHTML = cleanUpLyrics(displayedLyrics).replace(/\n/g, '<br>');
-
-    // Scroll lyrics section to the top
-    songLyrics.scrollTop = 0;
-
-    // Insert favorite lyrics section before the lyrics box
-    songLyrics.parentNode.insertBefore(favoriteLyrics, songLyrics);
+    // Insert favorite lyrics before the lyrics box
+    songLyrics.parentNode.insertBefore(favoriteLyricsContainer, songLyrics);
 
     // Set the audio source
     audioSource.src = song.file;
     audioPlayer.load();
-
-    // Play the audio
     audioPlayer.play();
 
     // Show or hide buttons based on song position
     prevButton.style.display = songIndex === 0 ? 'none' : 'inline-block';
     nextButton.style.display = songIndex === songs.length - 1 ? 'none' : 'inline-block';
     startOverButton.style.display = songIndex === songs.length - 1 ? 'inline-block' : 'none';
+
+    // Scroll lyrics section to the top
+    songLyrics.scrollTop = 0;
+
+    // Set and clean up lyrics
+    songLyrics.innerHTML = cleanUpLyrics(song.lyrics || 'Lyrics not available.').replace(/\n/g, '<br>');
 }
 
 // Event listener for the start button
 startButton.addEventListener('click', async () => {
     await loadSongs();
-
     if (songs.length > 0) {
-        welcomeScreen.style.transition = "opacity 0.5s ease-in-out";
         welcomeScreen.style.opacity = 0;
-
         setTimeout(() => {
             welcomeScreen.style.display = 'none';
             playlistScreen.style.display = 'flex';
-
             setTimeout(() => {
                 playlistScreen.style.opacity = 1;
             }, 100);
-
             loadSong(currentSongIndex);
         }, 500);
     }

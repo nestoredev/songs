@@ -51,21 +51,20 @@ body {
 #song-title {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 5px; /* Reduced margin to reduce spacing between title and artist */
+    margin: 0 0 3px 0; /* Remove top margin; 3px bottom margin for tight spacing */
     color: #b71550; /* Deep romantic red */
 }
 
 #artist-name {
     font-size: 1.2rem;
+    margin: 0 0 5px 0; /* Remove top margin; small bottom margin */
     color: #7a1b39; /* Soft wine red */
-    margin-bottom: 10px; /* Adjusted margin below artist */
 }
 
-/* Meaning Text */
 #song-meaning {
     font-size: 1rem;
-    font-style: normal; /* Removed italics */
-    margin-bottom: 20px;
+    margin: 0 0 20px 0; /* Remove top margin; 20px bottom margin */
+    font-style: normal; /* Normal style (no italics) */
 }
 
 /* Lyrics */
@@ -83,12 +82,9 @@ body {
 }
 
 /* Favorite Lyrics Section */
-#favorite-lyrics-container {
-    margin-bottom: 10px; /* Added margin between favorite lyrics and next content */
-}
-
+/* We'll wrap favorite lyrics in a container (set in JS) and then apply italics to its p tags */
 #favorite-lyrics-container p {
-    font-style: italic; /* Make Favorite Lyrics italic */
+    font-style: italic;
 }
 
 /* Audio Player */
@@ -171,7 +167,8 @@ button:hover {
 .video-frame {
     width: 100%;
     max-width: 90%; /* Limit the width to 90% for smaller screens */
-    height: 315px; /* Maintain 16:9 aspect ratio */
+    height: auto;
+    aspect-ratio: 16 / 9; /* Maintain the 16:9 aspect ratio */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     margin: 0 auto; /* Center the video */
@@ -187,19 +184,15 @@ button:hover {
     }
 }
 
-/* No longer need to hide buttons using a hidden class, we'll manage visibility in JS */
-
 /* Responsive Design */
 @media (max-width: 600px) {
     #playlist-screen {
         width: 90%;
         padding: 15px;
     }
-
     #song-lyrics {
         max-height: 150px;
     }
-
     button {
         font-size: 16px;
         padding: 10px 15px;

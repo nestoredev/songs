@@ -14,6 +14,10 @@ const audioSource = document.getElementById('audio-source');
 const prevButton = document.getElementById('prev-btn');
 const nextButton = document.getElementById('next-btn');
 const startOverButton = document.getElementById('start-over-btn');
+const videoContainer = document.createElement('div'); // Container for embedded YouTube videos
+
+// Insert video container after the audio player
+audioPlayer.parentNode.insertBefore(videoContainer, audioPlayer.nextSibling);
 
 let currentSongIndex = 0;
 let songs = [];
@@ -56,6 +60,27 @@ function handleLineBreaks(text) {
     return text.replace(/\n/g, '<br>');
 }
 
+// Function to embed YouTube videos
+function embedYouTubeVideos(videoUrls) {
+    videoContainer.innerHTML = ''; // Clear previous videos
+
+    if (!videoUrls || videoUrls.length === 0) return; // No videos, do nothing
+
+    videoUrls.forEach(url => {
+        const videoId = url.split('v=')[1]?.split('&')[0]; // Extract video ID
+        if (videoId) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.width = "560";
+            iframe.height = "315";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.style.marginTop = "15px"; // Add spacing above videos
+            videoContainer.appendChild(iframe);
+        }
+    });
+}
+
 // Function to load and display a song
 async function loadSong(songIndex) {
     if (songs.length === 0) return;
@@ -96,6 +121,9 @@ async function loadSong(songIndex) {
     audioSource.src = song.file;
     audioPlayer.load();
     audioPlayer.play();
+
+    // Embed YouTube videos
+    embedYouTubeVideos(song.videos || []);
 
     // Show or hide buttons based on song position
     prevButton.style.display = songIndex === 0 ? 'none' : 'inline-block';

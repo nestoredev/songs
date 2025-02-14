@@ -88,7 +88,7 @@ async function loadSong(songIndex) {
     const song = songs[songIndex];
 
     songTitle.textContent = song.title;
-    artistName.textContent = `Artist: ${song.artist}`;
+    artistName.textContent = `${song.artist}`;
 
     // Set meaning text in italics
     songMeaning.innerHTML = `<em>${song.meaning}</em>`;

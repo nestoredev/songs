@@ -147,61 +147,32 @@ button:hover {
     padding: 12px 20px;
 }
 
-/* Full Playlist Screen */
-#full-playlist-screen {
-    display: none;
+/* YouTube Video Container */
+#video-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    max-width: 600px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: opacity 0.5s ease-in-out; /* Added for smooth transition */
-    opacity: 0; /* Initially hidden */
-}
-
-#full-playlist-screen h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #b71550;
-}
-
-/* Playlist List */
-#playlist {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
     width: 100%;
+    margin-top: 15px;
 }
 
-#playlist li {
-    font-size: 1.2rem;
-    color: #7a1b39;
-    margin: 10px 0;
+/* YouTube Embedded Video */
+.video-frame {
+    width: 100%;
+    max-width: 560px; /* Matches YouTube's default embed size */
+    height: 315px; /* Maintain 16:9 aspect ratio */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#playlist a {
-    color: #d81b60;
-    text-decoration: none;
-}
-
-#playlist a:hover {
-    text-decoration: underline;
-}
-
-/* Back to Player Button */
-#back-to-player-btn {
-    margin-top: 20px;
-    padding: 12px 20px;
-    background: #ff4081;
-    border-radius: 30px;
-}
-
-#back-to-player-btn:hover {
-    background: #e91e63;
+/* Responsive YouTube Video */
+@media (max-width: 600px) {
+    .video-frame {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
 }
 
 /* No longer need to hide buttons using a hidden class, we'll manage visibility in JS */
@@ -220,9 +191,5 @@ button:hover {
     button {
         font-size: 16px;
         padding: 10px 15px;
-    }
-
-    #full-playlist-screen {
-        width: 90%;
     }
 }

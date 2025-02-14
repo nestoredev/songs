@@ -63,7 +63,7 @@ body {
 
 #song-meaning {
     font-size: 1rem;
-    margin: 0 0 20px 0; /* Remove top margin; 20px bottom margin */
+    margin: 0 0 10px 0; /* Remove top margin; 20px bottom margin */
     font-style: normal; /* Normal style (no italics) */
 }
 

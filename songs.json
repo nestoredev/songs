@@ -9,6 +9,15 @@
         "file": "assets/music/I-95.mp3"
     },
     {
+        "title": "Be My Baby",
+        "artist": "Travis",
+        "albumArt": "assets/images/album3.jpg",
+        "meaning": "The meaning behind Song 3...",
+        "lyrics": "",
+        "favoriteLyrics": "For every kiss you give me\nI'll give you three",
+        "file": "assets/music/Be-My-Baby.mp3"
+    },
+    {
         "title": "Rhythm of Love",
         "artist": "Plain White T's",
         "albumArt": "assets/images/album3.jpg",

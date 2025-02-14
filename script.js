@@ -121,7 +121,7 @@ async function loadSong(songIndex) {
     // Set the audio source
     audioSource.src = song.file;
     audioPlayer.load();
-    audioPlayer.play();
+    //audioPlayer.play();
 
     // Embed YouTube videos
     embedYouTubeVideos(song.videos || []);

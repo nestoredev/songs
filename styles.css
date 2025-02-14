@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;  /* Changed from height to min-height for dynamic page height */
+    height: 100vh;
 }
 
 /* Welcome Screen */
@@ -51,19 +51,19 @@ body {
 #song-title {
     font-size: 2rem;
     font-weight: bold;
-    margin: 0 0 3px 0; /* 3px bottom margin */
+    margin: 0 0 3px 0; /* Remove top margin; 3px bottom margin for tight spacing */
     color: #b71550; /* Deep romantic red */
 }
 
 #artist-name {
     font-size: 1.2rem;
-    margin: 0 0 15px 0; /* Increased bottom margin (15px) for more space before meaning */
+    margin: 0 0 15px 0; /* Increased bottom margin for more space before meaning */
     color: #7a1b39; /* Soft wine red */
 }
 
 #song-meaning {
     font-size: 1rem;
-    margin: 0 0 10px 0; /* Reduced bottom margin to 10px to slightly tighten spacing */
+    margin: 0 0 10px 0; /* Reduced bottom margin to 10px for less space before favorite lyrics */
     font-style: normal; /* Normal style (no italics) */
 }
 
@@ -82,12 +82,13 @@ body {
 }
 
 /* Favorite Lyrics Section */
+/* We assume favorite lyrics will be wrapped in a container set by JS (with ID #favorite-lyrics-container) */
 #favorite-lyrics-container {
-    margin-bottom: 10px; /* Margin between favorite lyrics and next content */
+    margin-bottom: 10px;
 }
 
 #favorite-lyrics-container p {
-    font-style: italic; /* Make Favorite Lyrics italic */
+    font-style: italic;
 }
 
 /* Audio Player */
@@ -131,7 +132,7 @@ button:hover {
     display: flex;
     justify-content: center;
     width: 100%;
-    gap: 10px; /* Space between buttons */
+    gap: 10px;
 }
 
 /* Previous & Next Button Styles */
@@ -145,7 +146,7 @@ button:hover {
 /* Start Over Button Container */
 .start-over-container {
     display: flex;
-    flex-direction: column; /* Stack Start Over button vertically */
+    flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
@@ -169,21 +170,21 @@ button:hover {
 /* YouTube Embedded Video */
 .video-frame {
     width: 100%;
-    max-width: 90%; /* Limit width to 90% for smaller screens */
+    max-width: 90%; /* Limit width to 90% of container on larger screens */
     height: auto;
-    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    aspect-ratio: 16 / 9; /* Maintain the 16:9 aspect ratio */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 0 auto; /* Center the video */
+    margin: 0 auto;
 }
 
 /* Responsive YouTube Video */
 @media (max-width: 600px) {
     .video-frame {
-        width: 100%; /* Full width on small screens */
-        height: auto; /* Adjust height automatically */
-        max-width: 100%; /* Prevent overflow */
-        aspect-ratio: 16 / 9; /* Maintain 16:9 ratio */
+        width: 90vw;         /* Use 90% of the viewport width */
+        max-width: 90vw;     /* Ensure it doesn't exceed 90% of viewport width */
+        height: auto;        /* Height adjusts automatically */
+        aspect-ratio: 16 / 9;
     }
 }
 

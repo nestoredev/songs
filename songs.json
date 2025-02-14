@@ -1,5 +1,14 @@
 [
     {
+        "title": "I-95",
+        "artist": "Fountains of Wayne",
+        "albumArt": "assets/images/album3.jpg",
+        "meaning": "The meaning behind Song 3...",
+        "lyrics": "",
+        "favoriteLyrics": "It's a nine hour drive, from me to you\nSouth on I-95 and I'll\nDo it til the day that i die if I need to\nJust to see you",
+        "file": "assets/music/I-95.mp3"
+    },
+    {
         "title": "All My Love",
         "artist": "Coldplay",
         "albumArt": "",

@@ -62,7 +62,8 @@
         "meaning": "I first heard this song from the video below. I'm a sap, so seeing JD look into his future as this song played just tugged at my heart.",
         "lyrics": "",
         "favoriteLyrics": "I love it when you sing to me\nAnd you can sing me anything",
-        "file": "assets/music/The-Book-of-Love.mp3"
+        "file": "assets/music/The-Book-of-Love.mp3",
+        "videos": ["https://www.youtube.com/watch?v=cTVpoT82toY"]
     },
 
     {
@@ -72,6 +73,7 @@
         "meaning": "This song was a grower for me. It took some time for it to really hit me. A simple message of walking side by side, not letting each other get too far behind. It makes me think of us, strolling through a big city, hand in hand.",
         "lyrics": "",
         "favoriteLyrics": "And if as we're walking a hand should slip free\nWell, I will wait for you\nAnd if I fall behind\nWait for me",
-        "file": "assets/music/If-I-Should-Fall-Behind.mp3"
+        "file": "assets/music/If-I-Should-Fall-Behind.mp3",
+        "videos": ["https://www.youtube.com/watch?v=mSQ6iRazzco"]
     }
 ]

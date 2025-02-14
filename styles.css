@@ -51,20 +51,20 @@ body {
 #song-title {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 2px; /* Reduced margin between title and artist */
     color: #b71550; /* Deep romantic red */
 }
 
 #artist-name {
     font-size: 1.2rem;
     color: #7a1b39; /* Soft wine red */
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Adjusted margin below artist */
 }
 
 #song-meaning {
-    font-style: italic;
     font-size: 1rem;
     margin-bottom: 20px;
+    font-style: normal; /* Removed italics */
 }
 
 /* Lyrics */
@@ -79,6 +79,11 @@ body {
     text-align: left;
     white-space: pre-wrap; /* Preserves line breaks */
     border: 1px solid #ff80ab;
+}
+
+/* Favorite Lyrics Section */
+#favorite-lyrics-container p {
+    font-style: italic; /* Make Favorite Lyrics italic */
 }
 
 /* Audio Player */
@@ -160,9 +165,8 @@ button:hover {
 /* YouTube Embedded Video */
 .video-frame {
     width: 100%;
-    max-width: 100%; /* Ensure it never exceeds the width of its container */
-    height: auto;
-    aspect-ratio: 16 / 9; /* Maintain the 16:9 aspect ratio */
+    max-width: 90%; /* Limit the width to 90% for smaller screens */
+    height: 315px; /* Maintain 16:9 aspect ratio */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     margin: 0 auto; /* Center the video */
@@ -171,9 +175,10 @@ button:hover {
 /* Responsive YouTube Video */
 @media (max-width: 600px) {
     .video-frame {
-        max-width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
+        width: 100%; /* Ensure the video takes full width on small screens */
+        height: auto; /* Allow the height to adjust to maintain aspect ratio */
+        max-width: 100%; /* Prevent overflow */
+        aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
     }
 }
 

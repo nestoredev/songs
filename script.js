@@ -60,6 +60,7 @@ function handleLineBreaks(text) {
     return text.replace(/\n/g, '<br>');
 }
 
+
 // Function to embed YouTube videos
 function embedYouTubeVideos(videoUrls) {
     videoContainer.innerHTML = ''; // Clear previous videos
@@ -67,12 +68,12 @@ function embedYouTubeVideos(videoUrls) {
     if (!videoUrls || videoUrls.length === 0) return; // No videos, do nothing
 
     videoUrls.forEach(url => {
-        const videoId = url.split('v=')[1]?.split('&')[0]; // Extract video ID
+        const videoId = url.split('v=')[1]?.split('&')[0]; // Extract video ID from standard YouTube URL
         if (videoId) {
             const iframe = document.createElement('iframe');
             iframe.src = `https://www.youtube.com/embed/${videoId}`;
-            iframe.width = "560";
-            iframe.height = "315";
+            // Remove inline width and height attributes and add a responsive class
+            iframe.classList.add("video-frame");
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
             iframe.style.marginTop = "15px"; // Add spacing above videos

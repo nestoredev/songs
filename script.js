@@ -129,6 +129,9 @@ async function loadSong(songIndex) {
     prevButton.style.display = songIndex === 0 ? 'none' : 'inline-block';
     nextButton.style.display = songIndex === songs.length - 1 ? 'none' : 'inline-block';
     startOverButton.style.display = songIndex === songs.length - 1 ? 'inline-block' : 'none';
+
+    // ... inside loadSong(songIndex) at the end, after setting everything
+    window.scrollTo(0, 0);
 }
 
 // Event listener for the start button

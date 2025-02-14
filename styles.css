@@ -61,10 +61,11 @@ body {
     margin-bottom: 10px; /* Adjusted margin below artist */
 }
 
+/* Meaning Text */
 #song-meaning {
     font-size: 1rem;
-    margin-bottom: 20px;
     font-style: normal; /* Removed italics */
+    margin-bottom: 20px;
 }
 
 /* Lyrics */
@@ -82,6 +83,10 @@ body {
 }
 
 /* Favorite Lyrics Section */
+#favorite-lyrics-container {
+    margin-bottom: 10px; /* Added margin between favorite lyrics and next content */
+}
+
 #favorite-lyrics-container p {
     font-style: italic; /* Make Favorite Lyrics italic */
 }

@@ -9,6 +9,24 @@
         "file": "assets/music/I-95.mp3"
     },
     {
+        "title": "She",
+        "artist": "Elvis Costello",
+        "albumArt": "assets/images/album3.jpg",
+        "meaning": "The meaning behind Song 3...",
+        "lyrics": "",
+        "favoriteLyrics": "Me, I'll take her laughter and her tears\nAnd make them all my souvenirs",
+        "file": "assets/music/She.mp3"
+    },
+    {
+        "title": "My One and Only Love",
+        "artist": "Paul McCartney",
+        "albumArt": "assets/images/album3.jpg",
+        "meaning": "The meaning behind Song 3...",
+        "lyrics": "",
+        "favoriteLyrics": "You fill my eager heart with such desire\nEvery kiss you give sets my soul on fire",
+        "file": "assets/music/My-One-And-Only-Love.mp3"
+    },
+    {
         "title": "All My Love",
         "artist": "Coldplay",
         "albumArt": "",
@@ -26,18 +44,14 @@
         "favoriteLyrics": "I love it when you sing to me\nAnd you can sing me anything",
         "file": "assets/music/The-Book-of-Love.mp3"
     },
+
     {
-        "title": "My One and Only Love",
-        "artist": "Paul McCartney",
+        "title": "If I Should Fall Behind",
+        "artist": "Bruce Springsteen & The E Street Band",
         "albumArt": "assets/images/album3.jpg",
         "meaning": "The meaning behind Song 3...",
         "lyrics": "",
-        "favoriteLyrics": "You fill my eager heart with such desire\nEvery kiss you give sets my soul on fire",
-        "file": "assets/music/My-One-And-Only-Love.mp3"
-    },
-    {
-        "title": "God Only Knows",
-        "artist": "The Beach Boys & Royal Philharmonic Orchestra",
-        "videos": ["https://youtu.be/uz4HsZqWy3Q?si=SXnl1W0Ykj0fzDyg"]
+        "favoriteLyrics": "And if as we're walking, a hand should slip free\nWell, I will wait for you, and if I fall behind, wait for me",
+        "file": "assets/music/If-I-Should-Fall-Behind.mp3"
     }
 ]

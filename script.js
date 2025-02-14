@@ -88,10 +88,10 @@ async function loadSong(songIndex) {
     const song = songs[songIndex];
 
     songTitle.textContent = song.title;
-    artistName.textContent = `${song.artist}`;
+    artistName.textContent = `${song.artist}`; // Removed "Artist:" label
 
-    // Set meaning text in italics
-    songMeaning.innerHTML = `<em>${song.meaning}</em>`;
+    // Set meaning text as plain text (not italic)
+    songMeaning.textContent = song.meaning;
 
     // Favorite Lyrics Section
     favoriteLyricsContainer.innerHTML = ''; // Clear previous content
@@ -99,8 +99,8 @@ async function loadSong(songIndex) {
         favoriteLyricsLabel.textContent = "Favorite Lyrics";
         favoriteLyricsLabel.style.fontWeight = "bold";
 
-        // Handle line breaks in favorite lyrics
-        favoriteLyricsText.innerHTML = handleLineBreaks(song.favoriteLyrics);
+        // Handle line breaks in favorite lyrics and italicize the text
+        favoriteLyricsText.innerHTML = `<em>${handleLineBreaks(song.favoriteLyrics)}</em>`;
         favoriteLyricsContainer.appendChild(favoriteLyricsLabel);
         favoriteLyricsContainer.appendChild(favoriteLyricsText);
         favoriteLyricsContainer.style.marginBottom = "10px";

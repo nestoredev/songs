@@ -160,8 +160,9 @@ button:hover {
 /* YouTube Embedded Video */
 .video-frame {
     width: 100%;
-    max-width: 90%; /* Limit the width to 90% for smaller screens */
-    height: 315px; /* Maintain 16:9 aspect ratio */
+    max-width: 100%; /* Ensure it never exceeds the width of its container */
+    height: auto;
+    aspect-ratio: 16 / 9; /* Maintain the 16:9 aspect ratio */
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     margin: 0 auto; /* Center the video */
@@ -170,10 +171,9 @@ button:hover {
 /* Responsive YouTube Video */
 @media (max-width: 600px) {
     .video-frame {
-        width: 100%; /* Ensure the video takes full width on small screens */
-        height: auto; /* Allow the height to adjust to maintain aspect ratio */
-        max-width: 100%; /* Prevent overflow */
-        aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
 }
 
